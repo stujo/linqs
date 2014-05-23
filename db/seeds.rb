@@ -7,8 +7,8 @@
 #   Mayor.create!(name: 'Emanuel', city: cities.first)
 railslink = Link.create!(:title => "Rails Guide", :url => "http://www.railsguide.com")
 
-Link.create!(:title => "Stack Overflow", :url => "http://www.stackoverflow.com")
-Link.create!(:title => "PostGres", :url => "http://www.postgres.com")
+railslink2 = Link.create!(:title => "Stack Overflow", :url => "http://www.stackoverflow.com")
+railslink3 = Link.create!(:title => "PostGres", :url => "http://www.postgres.com")
 
 tag = Tag.create!(:name => "ruby")
 
@@ -19,6 +19,7 @@ Tag.create!(:name => "sinatra")
 Tag.create!(:name => "rspec")
 Tag.create!(:name => "javascript")
 
-# railslink.comments.create!(:content => "Shaq is awesome")
-# railslink.comments.create!(:content => "Taylor likes to be the boss")
-# railslink.comments.create!(:content => "Rahul needs to calm down")
+commenta = railslink.comments.create!(:content => "Shaq is awesome")
+commentb = railslink2.comments.create!(:content => "Taylor likes to be the boss")
+commentc = railslink2.comments.create!(:content => "The team is becoming awesome")
+commentd = commenta.comments.create!(:content => "Rahul needs to calm down")
