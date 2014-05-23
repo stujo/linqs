@@ -1,5 +1,9 @@
-THIS IS THE INDEX PAGE FOR ALL THE LINKS
+<h1> Links Index Page </h1>
 <br>
+
+<%= link_to "Add a Link", new_link_path %><br>
+
 <% @links.each do |link| %>
-	<b><%= link.title %></b> - <%= link.url %><br>
+	<%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link.url %> <br>
 <% end %>
+

@@ -1,1 +1,11 @@
-THIS IS A LINKS NEW PAGE -- WE WILL REMOVE FOR AJAX CALLS ON MAIN PAGE
+<h1>LINKS NEW PAGE</h1>
+<h2>WE WILL REMOVE This to allow for AJAX CALLS ON MAIN PAGE</h2>
+
+<%= form_for @link do |f| %>
+	<%= f.text_field :title, placeholder: "Name This Link" %><br>
+	<%= f.text_area :url, placeholder: "Paste URL here" %><br>
+	<%= f.submit "Create" %>
+<% end %>
+<br>
+
+<%= link_to "Cancel", links_path %>

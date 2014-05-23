@@ -7,16 +7,22 @@ class LinksController < ApplicationController
   end
 
   def new
-    @links = Link.new
+    @link = Link.new
   end
 
   def create
     @link = Link.new(links_params)
     if @link.save
-      redirect_to link_path
+      redirect_to link_path(@link)
     else
-      flash[:errors] #something something
+      flash[:errors] = @link.errors.full_messages
     end
+  end
+
+  def show
+    @link = Link.find(params[:id])
+    @title = @link.title
+    @url = @link.url
   end
 
   def edit
@@ -25,7 +31,7 @@ class LinksController < ApplicationController
 
   def update
     @link = Link.find(params[:id])
-    if @link.update(link_params)
+    if @link.update(links_params)
       redirect_to link_path(@link)
     else
       flash[:errors] = @link.errors.full_messages
