@@ -1,0 +1,10 @@
+<h1>TAGS SHOW PAGE</h1>
+<h2>We will remove for single-page index and show</h2>
+
+<%= @name %><br>
+ <!-- This breaks when user inputs a url without http://www....need validations/templates  -->
+
+<%= link_to "edit", edit_tag_path(@tag)%> <%= link_to "delete", tag_path(@tag), method: :delete %>
+
+<h3>Links:</h3>
+Links gO hErE wooo

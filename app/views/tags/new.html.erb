@@ -1,0 +1,10 @@
+<h1>TAGS NEW PAGE</h1>
+<h2>WE WILL REMOVE This to allow for AJAX CALLS ON MAIN PAGE</h2>
+
+<%= form_for @tag do |f| %>
+	<%= f.text_field :name, placeholder: "Name This Tag" %><br>
+	<%= f.submit "Create" %>
+<% end %>
+<br>
+
+<%= link_to "Cancel", tags_path %>

@@ -1,0 +1,8 @@
+<h1>TAGS EDIT PAGE</h1>
+
+<%= form_for @tag do |f| %>
+	<%= f.text_field :name, placeholder: "f.name" %><br>
+	<%= f.submit "Update" %>
+<% end %>
+
+<%= link_to "Cancel", tags_path %>

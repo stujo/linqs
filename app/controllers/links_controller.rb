@@ -8,6 +8,8 @@ class LinksController < ApplicationController
 
   def new
     @link = Link.new
+    @link_tag = @link.link_tags.build
+    @link_tag.build_tag
   end
 
   def create
@@ -27,6 +29,8 @@ class LinksController < ApplicationController
 
   def edit
     @link = Link.find(params[:id])
+    @link_tag = @link.link_tags.build
+    @link_tag.build_tag
   end
 
   def update
@@ -47,6 +51,6 @@ class LinksController < ApplicationController
 
     private
     def links_params
-      params.require(:link).permit(:title, :url)
+      params.require(:link).permit(:title, :url, link_tags_attributes: [tags_attributes: [:name] ])
     end
   end
