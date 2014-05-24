@@ -1,9 +1,17 @@
-<h1> Links Index Page </h1>
-<br>
 
-<%= link_to "Add a Link", new_link_path %><br>
+<div class="container">
+	<h1> Links Index Page </h1>
+	<br>
 
-<% @links.each do |link| %>
-	<%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>
-<% end %>
+	<%#= link_to "Add a Link", new_link_path %><br>
+	<%= render :partial => 'form' %>
 
+	<% @links.each do |link| %>
+		<%#= link_to "edit", edit_link_path(link)%> <%#= link_to "delete", link_path(link), method: :delete %>  <b><%#= link.title %></b> <%#= link_to link.url, link.url %>
+	<% end %>
+
+<ul class="form">
+		<span class="edit_button"><%#= link_to "edit", edit_link_path(@link)%></span><span class="delete_button"><%#= link_to "delete", link_path(@link), method: :delete %></span>
+	</ul>
+
+</div>
