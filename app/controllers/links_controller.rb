@@ -3,6 +3,7 @@ class LinksController < ApplicationController
   end
 
   def index
+    @link = Link.new
     @links = Link.all
     respond_to do |format|
       format.html
@@ -18,13 +19,12 @@ class LinksController < ApplicationController
 
   def create
     @link = Link.new(links_params)
-    if @link.save
-      respond_to do |format|
-        format.html
-        format.json { render :json => {:link => @link.as_json(except: [:id, :created_at, :updated_at])}}
-      end
-    else
+    respond_to do |format|
+      if @link.save
+        format.json { render :json => {:link => @link.as_json(except: [:id, :created_at, :updated_at])}, status: :created}
+      else
       flash[:errors] = @link.errors.full_messages
+      end
     end
   end
 

@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'better_errors'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
@@ -28,6 +29,11 @@ gem 'spring',        group: :development
 
 gem 'devise'
 #user authentication
+
+group :development, :test do	
+	gem 'pry'
+	gem 'pry-debugger'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
