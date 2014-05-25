@@ -17,10 +17,5 @@ describe User do
   		user2 = User.create(email: "user1@email.com", password: "12345678", password_confirmation: "12345678")
   		user2.should_not be_valid
   	end
-
-  	it 'should be in proper email format' do
-  		user = User.create(email: "blahblahblahblah.com", password: "12345678", password_confirmation: "12345678")
-  		user.should_not be_valid
-  	end
   end
 end
