@@ -10,7 +10,6 @@ class LinksController < ApplicationController
 
 # will eventually display all public links via ajax get request
   def index
-
         links = Link.all
         @links = []
 
