@@ -13,13 +13,13 @@ class LinksController < ApplicationController
   def index
 
      # @links = Link.includes((:tag).where.not{:name => "private"})
-       # @links = Link.all
+        @links = Link.all
        # Link.where(:link_id => Link.id, tag.name => " private")
-         @links.each do |link|
-         @tag = link.tags.where.not(name: "private")
+         # @links.each do |link|
+         # @tag = link.tags.where.not(name: "private")
        # :domains => { :name => "pauls-domain"}})
        
-      end
+      # end
   end
 
   def new
@@ -32,7 +32,7 @@ class LinksController < ApplicationController
   def create
     @link = Link.new(links_params)
 
-    if @link.save 
+   
 
     @link[:user_id] = current_user.id
     if @link.save
@@ -41,6 +41,7 @@ class LinksController < ApplicationController
     else
       flash[:errors] = @link.errors.full_messages
     end
+
   end
 
   def show
