@@ -6,6 +6,7 @@ class TagsController < ApplicationController
 
   def new
     @tag = Tag.new
+    @tag.link_tags.build
   end
   
   def create

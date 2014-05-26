@@ -6,18 +6,29 @@
   <%= f.text_area :url, placeholder: "Paste URL here" %><br>
   <br>
   <b>
-   Tags:
+
+<%=f.fields_for :link_tags do |link_tags_form| %>
+  Tags:
   <br>
+
   <%=f.fields_for :tags do |tags_form| %>
       <%= tags_form.label :name %>
       <%= tags_form.text_field :name, placeholder: "Tag's name" %>
     
+
+
+
+<%=link_tags_form.fields_for :tag do |tags_form| %>
+    <%= tags_form.label :name %>
+    <%= tags_form.text_field :name %>
+
     <br>
-  <%= f.submit class: "btn btn-primary" 
-  %>
+
 <% end %>
 <% end %>
-<br>
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>
+
 
 <!-- NEED TO ADD VIEWS THAT ARE EMBEDDED -->
 

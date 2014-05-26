@@ -1,6 +1,12 @@
 class LinksController < ApplicationController
+
   before_action :find_link , only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, :except => [:index, :show]
+
+  before_filter :authenticate_user!
+  #before_filter :check_link_owner, only: [:edit, :update, :destroy]
+
+
   def main
   end
 
@@ -25,7 +31,12 @@ class LinksController < ApplicationController
 
   def create
     @link = Link.new(links_params)
+
     if @link.save 
+
+    @link[:user_id] = current_user.id
+    if @link.save
+
       redirect_to link_path(@link)
     else
       flash[:errors] = @link.errors.full_messages
@@ -39,9 +50,12 @@ class LinksController < ApplicationController
   end
 
   def edit
+
    # @link = Link.find(params[:id])
     @link_tag = @link.link_tags.build
     @link_tag.build_tag
+
+    @link = Link.find(params[:id])
   end
 
   def update
