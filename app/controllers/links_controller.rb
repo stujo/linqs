@@ -14,8 +14,22 @@ class LinksController < ApplicationController
 # will eventually display all public links via ajax get request
   def index
 
-     # @links = Link.includes((:tag).where.not{:name => "private"})
-        @links = Link.all
+     
+        links = Link.all
+        @links = []
+
+        links.each do |link|  
+          link_tags = []
+          link.tags.each do |tag|
+            link_tags.push(tag.name)
+          end
+
+          if link_tags.include?("private") == false
+            @links.push(link)
+          end
+        end
+
+       # @links = Link.includes((:tag).where.not{:name => "private"})
        # Link.where(:link_id => Link.id, tag.name => " private")
          # @links.each do |link|
          # @tag = link.tags.where.not(name: "private")

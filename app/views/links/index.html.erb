@@ -1,5 +1,5 @@
 <head>
-<nav class="navbar navbar-default" role="navigation">
+<!-- nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
 	  <div class="navbar-header">
 	    <h1 class="navbar-linqs">Linqs</h1>
@@ -11,12 +11,30 @@
 	  <button type="submit" class="btn btn-default">Submit</button>
 	</form>
   </div>
- </nav>
+ </nav> -->
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class= "navbar_header">
+	       <a  style="text-shadow:4px 4px 8px red ;" class="navbar-brand" href="#">Linqs</a>
+	       
+	       <%= link_to "Sign-out",  destroy_user_session_path, :method => :delete, :class => "btn btn-danger btn-sm navbar-right"%>
+      </div>
+	  <form class="navbar-form navbar-right" role="search">
+		  <div class="form-group">
+		    <input type="text" class="form-control" placeholder="Search">
+		  </div>
+		  <button type="submit" class="btn btn-default">Submit</button>
+	  </form>
+               
+   </div>
+  </div>
+ </nav></br></br>
+ <h2> Links Index Page </h2>
 </head>
 <body>
 
 
-<h2> Links Index Page </h2>
+
 
 <br>
 
@@ -25,18 +43,19 @@
 <% @links.each do |link| %>
 
 	
-	<ul class= " links_list"
+	<ul class= " links_list">
+	<% link.tags.each do |tag| %>
+		<%= tag.name %>
+	<%end %>
 	  <li>
-	<%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>	</li>
+		<%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>	</li>
 	</ul> 
-
-	
 
 <% end %>
 
 <ul class="pagination">
-  <li><a href="#">&laquo;</a></li>
-  <li><a href="#">1</a></li>
+  <li class="disabled"><a href="#">&laquo;</a></li>
+  <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
   <li><a href="#">2</a></li>
   <li><a href="#">3</a></li>
   <li><a href="#">4</a></li>
