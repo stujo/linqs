@@ -29,7 +29,10 @@ gem 'spring',        group: :development
 gem 'devise'
 #user authentication
 
+gem 'pry-rails'
+
 group :development, :test do
+	gem 'better_errors'
 	gem 'rspec-rails'
 	gem 'factory_girl_rails'	
 end
