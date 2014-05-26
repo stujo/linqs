@@ -12,7 +12,7 @@ $(document).ready(function() {
             return;
         } else { // send user input to json
             $.ajax({
-                url: '/links',
+                url: '/links/create',
                 method: 'post',
                 data: {
                     "link": {
