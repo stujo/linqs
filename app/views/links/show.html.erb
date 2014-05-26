@@ -9,4 +9,7 @@
 <%= link_to "Back", links_path(@link)%>
 
 <h3>Tags:</h3>
-TAGS gO hErE wooo
+	<% @link.tags.each do |tag| %>
+		<%=tag.name %>
+	<% end %>
+

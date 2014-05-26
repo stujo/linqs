@@ -3,8 +3,6 @@ class LinksController < ApplicationController
   before_action :find_link , only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, :except => [:index, :show]
 
-  before_filter :authenticate_user!
-
   def main
   end
 
@@ -20,6 +18,7 @@ class LinksController < ApplicationController
           end
           if link_tags.include?("private") == false
             @links.push(link)
+            #if private && the creator of link  does not equal current user - do not show
           end
         end
   end

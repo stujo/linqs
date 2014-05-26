@@ -12,7 +12,10 @@ railslink3 = Link.create!(:title => "PostGres", :url => "http://www.postgres.com
 
 tag = Tag.create!(:name => "ruby")
 
-Tag.create!(:name => "rails")
+railslink2.tags.create!(:name => "rails")
+railslink2.tags.create!(:name => "html5")
+railslink2.tags.create!(:name => "javascript")
+railslink3.tags.create!(:name => "private")
 Tag.create!(:name => "arrays")
 Tag.create!(:name => "hashes")
 Tag.create!(:name => "sinatra")
