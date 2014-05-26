@@ -19,6 +19,7 @@ class LinksController < ApplicationController
 
   def create
     @link = Link.new(links_params)
+    binding.pry
     respond_to do |format|
       if @link.save
         format.json { render :json => {:link => @link.as_json(except: [:id, :created_at, :updated_at])}, status: :created}
@@ -58,6 +59,6 @@ class LinksController < ApplicationController
 
     private
     def links_params
-      params.require(:link).permit(:title, :url, link_tags_attributes: [tags_attributes: [:name] ])
+      params.require(:link).permit(:title, :url, link_tags_attributes: [tag_attributes: [:name] ])
     end
   end
