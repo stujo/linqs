@@ -11,13 +11,6 @@
   Tags:
   <br>
 
-<!--   <%=f.fields_for :tag do |tags_form| %>
-      <%= tags_form.label :name %>
-      <%= tags_form.text_field :name, placeholder: "Tag's name" %> -->
-    
-
-
-
 <%=link_tags_form.fields_for :tag do |tags_form| %>
     <%= tags_form.label :name %>
     <%= tags_form.text_field :name %>
