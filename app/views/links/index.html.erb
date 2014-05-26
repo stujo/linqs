@@ -23,12 +23,15 @@
 <%= link_to "Add a Link", new_link_path %><br>
 
 <% @links.each do |link| %>
+
 	
 	<ul class= " links_list"
 	  <li>
-	<%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link.url %>
-	</li>
+	<%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>	</li>
 	</ul> 
+
+	
+
 <% end %>
 
 <ul class="pagination">
