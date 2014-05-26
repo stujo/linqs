@@ -1,15 +1,16 @@
 require 'spec_helper'
 
 describe User do
+  subject { FactoryGirl.create(:user) }
+
   describe 'email' do
   	it 'should have an email address' do
-  		user = User.create(email: "test@test.com", password: "12345678", password_confirmation: "12345678")
-  		user.should be_valid
+  		subject.should be_valid
   	end
 
   	it 'should be in email format' do
-  		user = User.create(email: "not_a_real_email", password: "12345678", password_confirmation: "12345678")
-  		user.should_not be_valid
+  		subject.email = "fake_email.com"
+      subject.should_not be_valid
   	end
 
   	it 'should be unique' do
