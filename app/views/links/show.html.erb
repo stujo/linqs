@@ -5,6 +5,7 @@
 <%= link_to @url, @url %><br> <!-- This breaks when user inputs a url without http://www....need validations/templates  -->
 
 <%= link_to "edit", edit_link_path(@link)%> <%= link_to "delete", link_path(@link), method: :delete %>
+<%= link_to "Back", links_path(@link)%>
 
 <h3>Tags:</h3>
 TAGS gO hErE wooo

@@ -8,9 +8,10 @@
   <b>
    Tags:
   <br>
-<%=f.fields_for :tags do |tags_form| %>
-    <%= tags_form.label :name %>
-    <%= tags_form.text_field :name %>
+  <%=f.fields_for :tags do |tags_form| %>
+      <%= tags_form.label :name %>
+      <%= tags_form.text_field :name, placeholder: "Tag's name" %>
+    
     <br>
   <%= f.submit class: "btn btn-primary" 
   %>
