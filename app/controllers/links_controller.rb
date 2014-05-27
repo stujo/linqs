@@ -9,6 +9,7 @@ class LinksController < ApplicationController
   end
 
 # will eventually display all public links via ajax get request
+
   def index
 
         links = Link.all
@@ -23,6 +24,7 @@ class LinksController < ApplicationController
             @links.push(link)
           end
         end
+      
   end
 
 # should build new tags associated with the new link - is this working??

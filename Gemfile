@@ -28,6 +28,7 @@ gem 'spring',        group: :development
 
 gem 'devise'
 #user authentication
+gem 'will_paginate', '~> 3.0'
 
 
 group :development, :test do
