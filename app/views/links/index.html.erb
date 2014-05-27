@@ -5,28 +5,81 @@
 
 <br>
 
-<%= link_to "Add a Link", new_link_path %><br>
+<form id="new_link">
+<input type="text" id="title" placeholder="Title" >
+<input type="text" id="url" placeholder="URL">
+<input type="text" id="name" placeholder="tag">
+<input type="submit"  >
+</form>
+
 <br>
-<h5>Public Links</h5>
+Public Links
+<ul id="publiclist">
 <% @links.each do |link| %>
-	<ul class= " links_list">
-	  <li>
-		<%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>	</li>
-	</ul> 
+    <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>
 <% end %>
-<h5>Private Links</h5>
-Show all private links created by current user
-<br>
-
-
-<ul class="pagination">
-  <li class="disabled"><a href="#">&laquo;</a></li>
-  <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-  <li><a href="#">2</a></li>
-  <li><a href="#">3</a></li>
-  <li><a href="#">4</a></li>
-  <li><a href="#">5</a></li>
-  <li><a href="#">&raquo;</a></li>
 </ul>
-</body>
+
+Private Links
+<ul id="privatelist">
+<% @linksprivate.each do |link| %>
+    <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>
+<% end %>
+</ul>
+
+<script type="text/javascript">
+
+
+$(document).ready(function() {
+    $('#new_link').on('submit', function(e) {
+         e.preventDefault();
+        var title = $('#title').val();
+        var url = $('#url').val();
+        var tag = $('#name').val();
+
+   
+        if (!title.length) {
+            return;
+        } else { // send user input to json
+            $.ajax({
+                url: '/links',
+                method: 'post',
+                data: {
+                    "link": {
+                        "title": title,
+                        "url": url,
+                        "link_tags_attributes": {
+                            "0": {
+                              "tag_attributes": {
+                                "name": tag
+                                }
+                            }
+                        }
+                    }
+                },
+                dataType: "json",
+                success: function(data) {
+                    console.log(data);
+                     var publiclist = $('#publiclist')
+                     console.log(data.title);
+                     console.log(data.url);
+                     var newLink = $('<li><b>' + data.title + ':</b> ' + data.url + '</li><br><p>Tags: ' + data.tags[0].name + '</p>');
+                     alert(newLink.inspect);
+                     newLink.append(+'<span class="delete">delete</span><span class="edit">edit</span>');
+                     newLink.hide().appendTo('publiclist').fadeIn(500);
+                },
+                //return false;
+                error: function(data) {
+                    console.log(data.responseText);
+                    alert("Yo its broke");
+                }
+            });
+            $('#link_title').val("");
+            $('#link_url').val("");
+            $('#link_tags_name').val("");
+        }
+    });
+});
+
+</script>
 
