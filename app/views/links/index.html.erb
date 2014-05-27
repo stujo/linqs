@@ -1,36 +1,27 @@
-<<<<<<< HEAD
-<head>
-=======
 
->>>>>>> authentication
- <h2> Links Index Page </h2>
+<head>
+
+ <h2> Welcome To The Linqs App </h2>
 
 <form id="new_link">
-<input type="text" id="title" placeholder="Title" >
-<input type="text" id="url" placeholder="URL">
-<input type="text" id="name" placeholder="tag">
-<input type="submit"  >
+    <input type="text" id="title" placeholder="Title" >
+    <input type="text" id="url" placeholder="URL">
+    <input type="text" id="name" placeholder="tag">
+    <input type="submit"  >
 </form>
 
 <br>
-Public Links
+<b>Public Links:</b>
 <ul id="publiclist">
 <% @links.each do |link| %>
-<<<<<<< HEAD
-    <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>
-=======
-	
 	<ul class= " links_list">
 	  <li>
 		<%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>	</li>
 	</ul> 
-
->>>>>>> authentication
 <% end %>
 </ul>
 
-<<<<<<< HEAD
-Private Links
+<b>Private Links:</b>
 <ul id="privatelist">
 <% @linksprivate.each do |link| %>
     <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>
@@ -92,7 +83,3 @@ $(document).ready(function() {
 });
 
 </script>
-=======
-
->>>>>>> authentication
-
