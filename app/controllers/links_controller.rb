@@ -49,7 +49,7 @@ class LinksController < ApplicationController
   def create
 
     @link = Link.new(links_params)
-    # @link[:user_id] = current_user.id
+    @link[:user_id] = current_user.id
     # if @link.save
 
     #   redirect_to link_path(@link)
@@ -100,6 +100,6 @@ class LinksController < ApplicationController
       @link = Link.find(params[:id])
     end
     def links_params
-      params.require(:link).permit(:title, :url, :link_tags_attributes => [:tag_attributes =>[:name]])
+      params.require(:link).permit(:title, :url, :user_id, :link_tags_attributes => [:tag_attributes =>[:name]])
     end
   end
