@@ -3,11 +3,10 @@ class LinksController < ApplicationController
   before_action :find_link , only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, :except => [:index, :show]
 
-  def main
-  end
 
   # will eventually display all public links via ajax get request
-  def index
+
+def index
   # makes a new instance of Link
     @link = Link.new
     links = Link.all
@@ -17,25 +16,25 @@ class LinksController < ApplicationController
     @linksprivate = []
 
   #accesses the tag
-    links.each do |link|  
+   links.each do |link|  
   #link_tags is the array where the tags are pushed into
       link_tags = []
       link.tags.each do |tag|
         link_tags.push(tag.name)
       end
-      #pushes everything that is "not private" into the array
-      if link_tags.include?("private") == false
-        @links.push(link)
-      #if private && the creator of link  does not equal current user - do not show
-        elsif link_tags.include?("private") == true # && currentuser = owner of the link
-        @linksprivate.push(link)
-      end 
+          #pushes everything that is "not private" into the array
+          if link_tags.include?("private") == false
+            @links.push(link)
+          #if private && the creator of link  does not equal current user - do not show
+            else link_tags.include?("private") == true # && currentuser = owner of the link
+            @linksprivate.push(link)
+          end 
     end
+        respond_to do |format|
+          format.html
+          format.json { render :json => {:links => @links.as_json}}
+        end
 
-    respond_to do |format|
-      format.html
-      format.json { render :json => {:links => @links.as_json}}
-    end
   end
 
 # should build new tags associated with the new link - is this working??

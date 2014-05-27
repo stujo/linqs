@@ -1,9 +1,9 @@
+<<<<<<< HEAD
 <head>
- <h2> Links Index Page </h2>
-</head>
-<body>
+=======
 
-<br>
+>>>>>>> authentication
+ <h2> Links Index Page </h2>
 
 <form id="new_link">
 <input type="text" id="title" placeholder="Title" >
@@ -16,10 +16,20 @@
 Public Links
 <ul id="publiclist">
 <% @links.each do |link| %>
+<<<<<<< HEAD
     <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>
+=======
+	
+	<ul class= " links_list">
+	  <li>
+		<%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>	</li>
+	</ul> 
+
+>>>>>>> authentication
 <% end %>
 </ul>
 
+<<<<<<< HEAD
 Private Links
 <ul id="privatelist">
 <% @linksprivate.each do |link| %>
@@ -82,4 +92,7 @@ $(document).ready(function() {
 });
 
 </script>
+=======
+
+>>>>>>> authentication
 
