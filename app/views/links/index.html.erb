@@ -6,6 +6,7 @@
 <br>
 
 <%= link_to "Add a Link", new_link_path %><br>
+<<<<<<< HEAD
 <br>
 <h5>Public Links</h5>
 <% @links.each do |link| %>
@@ -29,4 +30,78 @@ Show all private links created by current user
   <li><a href="#">&raquo;</a></li>
 </ul>
 </body>
+=======
 
+<form id="new_link">
+<input type="text" id="title" placeholder="Title" >
+<input type="text" id="url" placeholder="URL">
+<input type="text" id="name" placeholder="tag">
+<input type="submit"  >
+</form>
+
+
+<ul id="list">
+<% @links.each do |link| %>
+    <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>
+<% end %>
+</ul>
+
+<script type="text/javascript">
+
+
+$(document).ready(function() {
+    $('#new_link').on('submit', function(e) {
+        e.preventDefault();
+        var title = $('#title').val();
+        var url = $('#url').val();
+        var tag = $('#name').val();
+
+   
+        if (!title.length) {
+            return;
+        } else { // send user input to json
+            $.ajax({
+                url: '/links',
+                method: 'post',
+                data: {
+                    "link": {
+                        "title": title,
+                        "url": url,
+                        "link_tags_attributes": {
+                            "0": {
+                              "tag_attributes": {
+                                "name": tag
+                                }
+                            }
+                        }
+                    }
+                },
+                dataType: "json",
+                success: function(data) {
+                    console.log(data);
+                    // var ul = $('ul')
+                    // var newLink = $('<li><b>' + data.link.title + ':</b> ' + data.link.url + '</li><br><p>Tags: ' + data.link.link_tag_attributes.tag_attributes.name) + '</p>';
+                    // newLink.append(+'<span class="delete">delete</span><span class="edit">edit</span>');
+                    // newLink.hide().appendTo('ul').fadeIn(500);
+                },
+                //return false;
+                error: function(data) {
+                    console.log(data.responseText);
+                    alert("Yo its broke");
+                }
+            });
+            $('#link_title').val("");
+            $('#link_url').val("");
+            $('#link_tags_name').val("");
+        }
+    });
+});
+
+
+
+
+
+    
+>>>>>>> c0cc566e709e6adc671e4666ac0f432c49b370c7
+
+</script>
