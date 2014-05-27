@@ -8,28 +8,28 @@ class LinksController < ApplicationController
 
 # will eventually display all public links via ajax get request
   def index
-<<<<<<< HEAD
-        links = Link.all
-        @links = []
+# <<<<<<< HEAD
+#         links = Link.all
+#         @links = []
 
-        links.each do |link|  
-          link_tags = []
-          link.tags.each do |tag|
-            link_tags.push(tag.name)
-          end
-          if link_tags.include?("private") == false
-            @links.push(link)
-            #if private && the creator of link  does not equal current user - do not show
-          end
-        end
-=======
+#         links.each do |link|  
+#           link_tags = []
+#           link.tags.each do |tag|
+#             link_tags.push(tag.name)
+#           end
+#           if link_tags.include?("private") == false
+#             @links.push(link)
+#             #if private && the creator of link  does not equal current user - do not show
+#           end
+#         end
+
+# =======
     @link = Link.new
     @links = Link.all
     respond_to do |format|
       format.html
       format.json { render :json => {:links => @links.as_json}}
     end
->>>>>>> c0cc566e709e6adc671e4666ac0f432c49b370c7
   end
 
 # should build new tags associated with the new link - is this working??
@@ -42,14 +42,12 @@ class LinksController < ApplicationController
 # will send new instance of link via ajax post to db and retrieves json for same link to display on page without reloading
   def create
     @link = Link.new(links_params)
-<<<<<<< HEAD
-    @link[:user_id] = current_user.id
-    if @link.save
+    # @link[:user_id] = current_user.id
+    # if @link.save
 
-      redirect_to link_path(@link)
-    else
-      flash[:errors] = @link.errors.full_messages
-=======
+    #   redirect_to link_path(@link)
+    # else
+    #   flash[:errors] = @link.errors.full_messages
     # @link[:user_id] = current_user.id
     respond_to do |format|
       if @link.save
@@ -57,7 +55,6 @@ class LinksController < ApplicationController
       else
         format.json { render json: @link.errors, status: :unprocessable_entity}
       end
->>>>>>> c0cc566e709e6adc671e4666ac0f432c49b370c7
     end
 
   end

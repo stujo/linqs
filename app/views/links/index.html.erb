@@ -4,9 +4,8 @@
 <body>
 
 <br>
-
+<!-- 
 <%= link_to "Add a Link", new_link_path %><br>
-<<<<<<< HEAD
 <br>
 <h5>Public Links</h5>
 <% @links.each do |link| %>
@@ -31,7 +30,7 @@ Show all private links created by current user
 </ul>
 </body>
 =======
-
+ -->
 <form id="new_link">
 <input type="text" id="title" placeholder="Title" >
 <input type="text" id="url" placeholder="URL">
@@ -51,7 +50,7 @@ Show all private links created by current user
 
 $(document).ready(function() {
     $('#new_link').on('submit', function(e) {
-        e.preventDefault();
+         e.preventDefault();
         var title = $('#title').val();
         var url = $('#url').val();
         var tag = $('#name').val();
@@ -96,12 +95,5 @@ $(document).ready(function() {
         }
     });
 });
-
-
-
-
-
-    
->>>>>>> c0cc566e709e6adc671e4666ac0f432c49b370c7
 
 </script>
