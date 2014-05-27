@@ -12,9 +12,17 @@
 <input type="submit"  >
 </form>
 
-
-<ul id="list">
+<br>
+Public Links
+<ul id="publiclist">
 <% @links.each do |link| %>
+    <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>
+<% end %>
+</ul>
+
+Private Links
+<ul id="privatelist">
+<% @linksprivate.each do |link| %>
     <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>
 <% end %>
 </ul>
@@ -52,10 +60,13 @@ $(document).ready(function() {
                 dataType: "json",
                 success: function(data) {
                     console.log(data);
-                    // var ul = $('ul')
-                    // var newLink = $('<li><b>' + data.link.title + ':</b> ' + data.link.url + '</li><br><p>Tags: ' + data.link.link_tag_attributes.tag_attributes.name) + '</p>';
-                    // newLink.append(+'<span class="delete">delete</span><span class="edit">edit</span>');
-                    // newLink.hide().appendTo('ul').fadeIn(500);
+                     var publiclist = $('#publiclist')
+                     console.log(data.title);
+                     console.log(data.url);
+                     var newLink = $('<li><b>' + data.title + ':</b> ' + data.url + '</li><br><p>Tags: ' + data.tags[0].name + '</p>');
+                     alert(newLink.inspect);
+                     newLink.append(+'<span class="delete">delete</span><span class="edit">edit</span>');
+                     newLink.hide().appendTo('publiclist').fadeIn(500);
                 },
                 //return false;
                 error: function(data) {
@@ -71,3 +82,4 @@ $(document).ready(function() {
 });
 
 </script>
+

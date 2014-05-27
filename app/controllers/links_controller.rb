@@ -6,26 +6,32 @@ class LinksController < ApplicationController
   def main
   end
 
-# will eventually display all public links via ajax get request
+  # will eventually display all public links via ajax get request
   def index
-# <<<<<<< HEAD
-#         links = Link.all
-#         @links = []
-
-#         links.each do |link|  
-#           link_tags = []
-#           link.tags.each do |tag|
-#             link_tags.push(tag.name)
-#           end
-#           if link_tags.include?("private") == false
-#             @links.push(link)
-#             #if private && the creator of link  does not equal current user - do not show
-#           end
-#         end
-
-# =======
+  # makes a new instance of Link
     @link = Link.new
-    @links = Link.all
+    links = Link.all
+
+  #creates an empty array for public and private links
+    @links = []
+    @linksprivate = []
+
+  #accesses the tag
+    links.each do |link|  
+  #link_tags is the array where the tags are pushed into
+      link_tags = []
+      link.tags.each do |tag|
+        link_tags.push(tag.name)
+      end
+      #pushes everything that is "not private" into the array
+      if link_tags.include?("private") == false
+        @links.push(link)
+      #if private && the creator of link  does not equal current user - do not show
+        elsif link_tags.include?("private") == true # && currentuser = owner of the link
+        @linksprivate.push(link)
+      end 
+    end
+
     respond_to do |format|
       format.html
       format.json { render :json => {:links => @links.as_json}}
