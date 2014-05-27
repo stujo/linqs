@@ -19,8 +19,9 @@ Public Links
     <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>
 <% end %>
 </ul>
-
+<% if current_user != nil %>
 Private Links
+<% end %>
 <ul id="privatelist">
 <% @linksprivate.each do |link| %>
     <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>
@@ -61,14 +62,24 @@ $(document).ready(function() {
                 success: function(data) {
                     console.log(data);
                      var publiclist = $('#publiclist')
+                     var privatelist = $('#privatelist')
                      console.log(data.title);
                      console.log(data.url);
-                     var newLink = $('<li><span class="edit">edit</span>' + " " + '<span class="delete">delete </span><b>' + data.title + ' - </b> ' + data.url + ' <b>Tags:</b> ' + data.tags[0].name + '</li>');
+
+
+var newLink =  $('<a href="/links/' +data.id + '/edit">edit</a> <a data-method="delete" href="/links/' + data.id + '" rel="nofollow">delete</a> <b>' + data.title + '</b> - <a href="' + data.url + '">' + data.url + '</a> <br>')
+                     // var newLink = $('<li><span class="edit">edit</span>' + " " + '<span class="delete">delete </span><b>' + data.title + ' - </b> ' + data.url + ' <b>Tags:</b> ' + data.tags[0].name + '</li>');
                      // var LinkwithButtons = $('<span class="delete">delete</span><span class="edit">edit</span>' + newLink);
                      console.log(newLink);
                      // newLink.prepend('<span class="delete">delete</span><span class="edit">edit</span>' +);
                      // newLink.hide().appendTo('publiclist').fadeIn(500);
-                     publiclist.prepend(newLink);
+                    if (data.tags[0].name === "private") {
+                        privatelist.prepend(newLink) 
+                    }
+                    else {
+                        publiclist.prepend(newLink) 
+                    };
+
                 },
                 //return false;
                 error: function(data) {

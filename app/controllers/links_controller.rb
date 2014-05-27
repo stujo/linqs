@@ -24,11 +24,15 @@ class LinksController < ApplicationController
         link_tags.push(tag.name)
       end
       #pushes everything that is "not private" into the array
-      if link_tags.include?("private") == false
+      if !link_tags.include?("private")
         @links.push(link)
       #if private && the creator of link  does not equal current user - do not show
-        elsif link_tags.include?("private") == true # && currentuser = owner of the link
-        @linksprivate.push(link)
+      elsif current_user != nil
+          if link_tags.include?("private") == true && link.user_id == current_user.id
+            @linksprivate.push(link)
+          end
+      else
+          flash[:errors] = "You're not logged in sucka!!!"
       end 
     end
 
@@ -49,7 +53,13 @@ class LinksController < ApplicationController
   def create
 
     @link = Link.new(links_params)
+    # @link_tag = @link.link_tags.build
+    # @link_tag.build_tag
     @link[:user_id] = current_user.id
+    # @tag[:user_id] = current_user.id
+
+
+    #@link.tags.last[:user_id] = current_user.id
     # if @link.save
 
     #   redirect_to link_path(@link)
@@ -63,6 +73,9 @@ class LinksController < ApplicationController
         format.json { render json: @link.errors, status: :unprocessable_entity}
       end
     end
+    @tag = @link.tags.last
+    @tag[:user_id] = current_user.id
+    @tag.save
   end
 
 # shows details of a single link, including all tags assoc'd with it
@@ -100,6 +113,6 @@ class LinksController < ApplicationController
       @link = Link.find(params[:id])
     end
     def links_params
-      params.require(:link).permit(:title, :url, :user_id, :link_tags_attributes => [:tag_attributes =>[:name]])
+      params.require(:link).permit(:title, :url, :link_tags_attributes => [:tag_attributes =>[:name]])
     end
   end
