@@ -63,10 +63,12 @@ $(document).ready(function() {
                      var publiclist = $('#publiclist')
                      console.log(data.title);
                      console.log(data.url);
-                     var newLink = $('<li><b>' + data.title + ':</b> ' + data.url + '</li><br><p>Tags: ' + data.tags[0].name + '</p>');
-                     alert(newLink.inspect);
-                     newLink.append(+'<span class="delete">delete</span><span class="edit">edit</span>');
-                     newLink.hide().appendTo('publiclist').fadeIn(500);
+                     var newLink = $('<li><span class="edit">edit</span>' + " " + '<span class="delete">delete </span><b>' + data.title + ' - </b> ' + data.url + ' <b>Tags:</b> ' + data.tags[0].name + '</li>');
+                     // var LinkwithButtons = $('<span class="delete">delete</span><span class="edit">edit</span>' + newLink);
+                     console.log(newLink);
+                     // newLink.prepend('<span class="delete">delete</span><span class="edit">edit</span>' +);
+                     // newLink.hide().appendTo('publiclist').fadeIn(500);
+                     publiclist.prepend(newLink);
                 },
                 //return false;
                 error: function(data) {

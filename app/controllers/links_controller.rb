@@ -10,7 +10,7 @@ class LinksController < ApplicationController
   def index
   # makes a new instance of Link
     @link = Link.new
-    links = Link.all
+    links = Link.all.order(:created_at).reverse_order
 
   #creates an empty array for public and private links
     @links = []
