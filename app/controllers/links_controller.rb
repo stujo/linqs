@@ -41,6 +41,7 @@ class LinksController < ApplicationController
 
 # will send new instance of link via ajax post to db and retrieves json for same link to display on page without reloading
   def create
+
     @link = Link.new(links_params)
     # @link[:user_id] = current_user.id
     # if @link.save
@@ -56,7 +57,6 @@ class LinksController < ApplicationController
         format.json { render json: @link.errors, status: :unprocessable_entity}
       end
     end
-
   end
 
 # shows details of a single link, including all tags assoc'd with it

@@ -4,33 +4,7 @@
 <body>
 
 <br>
-<!-- 
-<%= link_to "Add a Link", new_link_path %><br>
-<br>
-<h5>Public Links</h5>
-<% @links.each do |link| %>
-	<ul class= " links_list">
-	  <li>
-		<%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>	</li>
-	</ul> 
-<% end %>
-<h5>Private Links</h5>
-Show all private links created by current user
-<br>
 
-
-<ul class="pagination">
-  <li class="disabled"><a href="#">&laquo;</a></li>
-  <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-  <li><a href="#">2</a></li>
-  <li><a href="#">3</a></li>
-  <li><a href="#">4</a></li>
-  <li><a href="#">5</a></li>
-  <li><a href="#">&raquo;</a></li>
-</ul>
-</body>
-=======
- -->
 <form id="new_link">
 <input type="text" id="title" placeholder="Title" >
 <input type="text" id="url" placeholder="URL">
