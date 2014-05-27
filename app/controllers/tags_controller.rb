@@ -50,6 +50,6 @@ class TagsController < ApplicationController
       @tag = Tag.find(params[:id])
     end
     def tags_params
-      params.require(:tag).permit(:name, :user_id)
+      params.require(:tag).permit(:name)
     end
 end
