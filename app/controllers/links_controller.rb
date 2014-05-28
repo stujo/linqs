@@ -3,11 +3,10 @@ class LinksController < ApplicationController
   before_action :find_link , only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, :except => [:index, :show]
 
-  def main
-  end
 
   # will eventually display all public links via ajax get request
-  def index
+
+def index
   # makes a new instance of Link
     @link = Link.new
     links = Link.all.order(:created_at).reverse_order
@@ -19,10 +18,11 @@ class LinksController < ApplicationController
   #accesses the tag
     links.each do |link|  
   #link_tags is the array where the tags are pushed into
-      link_tags = []
-      link.tags.each do |tag|
-        link_tags.push(tag.name)
+    link_tags = []
+    link.tags.each do |tag|
+    link_tags.push(tag.name)
       end
+
       #pushes everything that is "not private" into the array
       if !link_tags.include?("private")
         @links.push(link)
@@ -35,11 +35,11 @@ class LinksController < ApplicationController
           flash[:errors] = "You're not logged in sucka!!!"
       end 
     end
+        respond_to do |format|
+          format.html
+          format.json { render :json => {:links => @links.as_json}}
+        end
 
-    respond_to do |format|
-      format.html
-      format.json { render :json => {:links => @links.as_json}}
-    end
   end
 
 # should build new tags associated with the new link - is this working??

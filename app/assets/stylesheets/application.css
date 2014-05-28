@@ -15,3 +15,32 @@
  *= require bootstrap.css
  */
 
+ #displayText {
+ 	display: block;
+ }
+ #new_link {
+ 	display: none;
+ }
+  body { 
+  padding: 3em 5em; 
+  background: #EEE8D5; 
+  font-size: $body-font-size; 
+}
+  #container {
+
+		  position: relative;  
+		  margin: 0 auto;
+		  width: 90%;
+		  max-width: 940px;
+  }
+ .logo {
+	  font-size: 1.5em;
+	  font-weight: 900;
+	  background: red;
+	  padding: 5px;
+	  border-radius: 10px 0;
+	  color: white;
+	  float: left;
+}
+
+
