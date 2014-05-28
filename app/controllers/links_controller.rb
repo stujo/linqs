@@ -6,40 +6,39 @@ class LinksController < ApplicationController
 
   # will eventually display all public links via ajax get request
 
-def index
-  # makes a new instance of Link
+  def index
+    # makes a new instance of Link
     @link = Link.new
     links = Link.all.order(:created_at).reverse_order
 
-  #creates an empty array for public and private links
+    #creates an empty array for public and private links
     @links = []
     @linksprivate = []
 
-  #accesses the tag
+    # accesses the tag
     links.each do |link|  
-  #link_tags is the array where the tags are pushed into
-    link_tags = []
-    link.tags.each do |tag|
-    link_tags.push(tag.name)
+    #link_tags is the array where the tags are pushed into
+      link_tags = []
+        link.tags.each do |tag|
+          link_tags.push(tag.name)
       end
 
       #pushes everything that is "not private" into the array
       if !link_tags.include?("private")
         @links.push(link)
-      #if private && the creator of link  does not equal current user - do not show
+      # if private && the creator of link  does not equal current user - do not show
       elsif current_user != nil
-          if link_tags.include?("private") == true && link.user_id == current_user.id
-            @linksprivate.push(link)
-          end
+        if link_tags.include?("private") == true && link.user_id == current_user.id
+          @linksprivate.push(link)
+        end
       else
-          flash[:errors] = "You're not logged in sucka!!!"
+        flash[:errors] = "You're not logged in sucka!!!"
       end 
     end
-        respond_to do |format|
-          format.html
-          format.json { render :json => {:links => @links.as_json}}
-        end
-
+      respond_to do |format|
+        format.html
+        format.json { render :json => {:links => @links.as_json}}
+      end
   end
 
 # should build new tags associated with the new link - is this working??
@@ -51,31 +50,34 @@ def index
 
 # will send new instance of link via ajax post to db and retrieves json for same link to display on page without reloading
   def create
-
-    @link = Link.new(links_params)
-    # @link_tag = @link.link_tags.build
-    # @link_tag.build_tag
-    @link[:user_id] = current_user.id
-    # @tag[:user_id] = current_user.id
-
-
-    #@link.tags.last[:user_id] = current_user.id
-    # if @link.save
-
-    #   redirect_to link_path(@link)
+    # decide if link url already exists in db
+    @potentialLink = Link.find_by(url: links_params[:url])
+    # # if link url already exists, flash an error
+    # if @potentialLink
+    # flash[:errors] = @potentialLink.errors.full_messages
+    # # if it doesn't, save new link to the db
     # else
-    #   flash[:errors] = @link.errors.full_messages
-    # @link[:user_id] = current_user.id
-    respond_to do |format|
-      if @link.save
-        format.json { render :json => @link, :include=> :tags, status: :created}
+      @link = current_user.links.new(title: links_params[:title], url: links_params[:url])
+      @link.save
+      # Decide if tag is already in the database
+      @potentialTag = Tag.find_by(name: links_params[:link_tags_attributes]["0"][:tag_attributes][:name])
+        # if tag is already in db, create a new association btween new link and old tag
+      if @potentialTag
+        @link_tag = @link.link_tags.build(link_id: @link.id, tag_id: @potentialTag.id)
+        @link_tag.save
+        # otherwise, save new tag
       else
-        format.json { render json: @link.errors, status: :unprocessable_entity}
+        @link.tags.build( name: links_params[:link_tags_attributes]["0"][:tag_attributes][:name])
+        @link.save
       end
+      respond_to do |format|
+        if @link.save
+          format.json { render :json => @link, :include=> :tags, status: :created}
+        else
+          format.json { render json: @link.errors, status: :unprocessable_entity}
+        end
+      # end
     end
-    @tag = @link.tags.last
-    @tag[:user_id] = current_user.id
-    @tag.save
   end
 
 # shows details of a single link, including all tags assoc'd with it
@@ -102,20 +104,22 @@ def index
     end
   end
 
-    def destroy
-      @link.destroy
-      redirect_to root_path
-    end
+  def destroy
+    @link.destroy
+    redirect_to root_path
+  end
 
 
-    private
+  private
     def find_link
       @link = Link.find(params[:id])
     end
+
     def links_params
       params.require(:link).permit(:title, :url, :link_tags_attributes => [:tag_attributes =>[:name]])
     end
   end
+end
 
 
 
