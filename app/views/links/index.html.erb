@@ -4,6 +4,7 @@
  <h2> Welcome To The Linqs App </h2>
 
 <a id="displayText", href="javascript:toggle();">Add a link</a>
+<a id="findlink", href="javascript:toggle();"> Search for a link</a>
 
 
 <form id="new_link">
@@ -12,6 +13,11 @@
     <input type="text" id="name" placeholder="tag">
     <input type="submit"  >
 </form>
+<form id="find_link">
+    <input type="text" id="search" placeholder="Search ...">
+    <input type="submit">
+</form>
+
 
 <br>
 <b>Public Links:</b>
@@ -19,7 +25,9 @@
 <% @links.each do |link| %>
 	<ul class= " links_list">
 	  <li>
-		<%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>	</li>
+
+		<%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> -  <%=link_to link.tags[0]["name"], root_path %> 
+        <br>	</li>
 	</ul> 
 <% end %>
 </ul>
@@ -45,6 +53,19 @@ $(document).ready(function() {
             if(ele.style.display == "block"){
                 ele.style.display = "none";
                 text.innerHTML = "Add A Link";
+            }
+            else {
+                ele.style.display = "block";
+                text.innerHTML = "Hide Form";
+            }
+
+    });
+     $("#findlink").on("click",function toggle(){
+          var ele = document.getElementById("find_link");
+            var text = document.getElementById("findlink");
+            if(ele.style.display == "block"){
+                ele.style.display = "none";
+                text.innerHTML = "Search for a Link";
             }
             else {
                 ele.style.display = "block";

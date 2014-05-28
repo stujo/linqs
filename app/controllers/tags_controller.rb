@@ -1,5 +1,6 @@
 class TagsController < ApplicationController
  before_action :find_tag, only: [:show, :edit, :update, :destroy]
+ validates :name , presence: true
  
   def index
     @tags = Tag.all
