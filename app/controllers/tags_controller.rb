@@ -27,10 +27,15 @@ class TagsController < ApplicationController
 
   def edit
     # @tag = Tag.find(params[:id])
+    @tag = Tag.find(params[:id])
+    # find all link_ids assoc'd with tag_id in link_tags
+    @links = []
+    @tag.link_tags.find_by(tag_id: @tag.id).each do |link|
+      @links.push(link)
+      end
   end
 
   def update
-    #@tag = Tag.find(params[:id])
     if @tag.update(tags_params)
       redirect_to tag_path(@tag)
     else
@@ -39,6 +44,7 @@ class TagsController < ApplicationController
     end
   end
 
+
   def destroy
     #@tag = Tag.find(params[:id])
     @tag.destroy
@@ -46,10 +52,11 @@ class TagsController < ApplicationController
   end
 
   private
-  def find_tag
-    @tag = Tag.find(params[:id])
-  end
-  def tags_params
-    params.require(:tag).permit(:name)
-  end
+    def find_tag
+      @tag = Tag.find(params[:id])
+    end
+
+    def tags_params
+      params.require(:tag).permit(:name)
+    end
 end
