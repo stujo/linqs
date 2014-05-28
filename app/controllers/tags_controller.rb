@@ -38,6 +38,9 @@ class TagsController < ApplicationController
       render :edit
     end
   end
+  def search
+      @tags = Tag.search (params[:search])
+    end
 
     def destroy
       #@tag = Tag.find(params[:id])

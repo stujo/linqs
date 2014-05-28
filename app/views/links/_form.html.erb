@@ -1,5 +1,4 @@
-<h1>LINKS NEW PAGE</h1>
-<h2>WE WILL REMOVE This to allow for AJAX CALLS ON MAIN PAGE</h2>
+<h2>Edit Your Link:</h2>
 
 <%= form_for @link do |f| %>
   <%= f.text_field :title, placeholder: "Name This Link" %><br>
@@ -7,17 +6,16 @@
   <br>
   <b>
 
-<%=f.fields_for :link_tags do |link_tags_form| %>
-  Tags:
-  <br>
+    <%=f.fields_for :link_tags do |link_tags_form| %>
+      Tags:
+      <br>
 
-<%=link_tags_form.fields_for :tag do |tags_form| %>
-    <%= tags_form.label :name %>
-    <%= tags_form.text_field :name %>
-
-    <br>
-
-<% end %>
+        <%=link_tags_form.fields_for :tag do |tags_form| %>
+            <%= tags_form.label :name %>
+            <%= tags_form.text_field :name %>
+            <% end %>
+        <br>
+    <% end %>
   <%= f.submit class: "btn btn-primary" %>
 <% end %>
 

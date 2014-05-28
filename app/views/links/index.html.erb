@@ -1,33 +1,38 @@
 
-<head>
 
- <h2> Welcome To The Linqs App </h2>
 
-<form id="new_link">
-    <input type="text" id="title" placeholder="Title" >
-    <input type="text" id="url" placeholder="URL">
-    <input type="text" id="name" placeholder="tag">
-    <input type="submit"  >
-</form>
-
-<br>
-<b>Public Links:</b>
-<ul id="publiclist">
-<% @links.each do |link| %>
-	<ul class= " links_list">
-	  <li>
-		<%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>	</li>
-	</ul> 
-<% end %>
-</ul>
-
-<b>Private Links:</b>
-<ul id="privatelist">
-<% @linksprivate.each do |link| %>
-    <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>
-<% end %>
-</ul>
-
+<ul> 
+    <li> <a href =“#”>Add link</a></li>
+    <li> <a href =“#”>Find link</a></li>
+<ul>        
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Public Links:</h3>
+  </div>
+  <div class="panel-body">
+    <ul id="publiclist">
+        <% @links.each do |link| %>
+            <ul class= " links_list">
+              <li>
+               <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link),method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br> 
+               </li>
+            </ul> 
+        <% end %>
+    </ul>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Private Links:</h3>
+  </div>
+  <div class="panel-body">       
+    <ul id="privatelist">
+    <% @linksprivate.each do |link| %>
+      <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>
+    <% end %>
+    </ul>
+ </div>
+</div>
 <script type="text/javascript">
 
 
@@ -80,6 +85,21 @@ $(document).ready(function() {
             $('#link_tags_name').val("");
         }
     });
+ //  var search = document.getElementById("search");
+ // var data = [];
+
+ // search.onclick = function() {
+ //    var formInput = document.getElementById("formInput").value;
+
+ //    for (i=0; i<data.length; i++){
+ //       if (data[i] == formInput) {
+ //          alert(data[i]);
+ //       } else {
+ //          alert("not working yet");
+ //       }
+ //    }
+ };
 });
 
 </script>
+
