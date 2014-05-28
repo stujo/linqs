@@ -1,5 +1,6 @@
 class TagsController < ApplicationController
  before_action :find_tag, only: [:show, :edit, :update, :destroy]
+ validates :name , presence: true
  
   def index
     @tags = Tag.all
@@ -19,6 +20,7 @@ class TagsController < ApplicationController
       flash[:errors] = @tag.errors.full_messages
     end
   end
+  
 
   def show
    # @tag = Tag.find(params[:id])

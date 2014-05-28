@@ -4,12 +4,18 @@
  <h2> Welcome To The Linqs App </h2>
 
 <a id="displayText", href="javascript:toggle();">Add a link</a>
+<a id="findlink", href="javascript:toggle();">Search For Link</a>
+
 
 <form id="new_link">
     <input type="text" id="title" placeholder="Title" >
     <input type="text" id="url" placeholder="URL">
     <input type="text" id="name" placeholder="tag">
     <input type="submit"  >
+</form>
+<form id="find_link">
+    <input type="text" id="search_key" placeholder="Search ..">
+    <input type="submit", tag_path >
 </form>
 
        
@@ -41,11 +47,13 @@
     </ul>
  </div>
 </div>
+<br>
+
 <script type="text/javascript">
 
 
 $(document).ready(function() {
-   
+
 
     $("#displayText").on("click",function toggle(){
           var ele = document.getElementById("new_link");
@@ -61,7 +69,21 @@ $(document).ready(function() {
 
     });
 
+    $("#findlink").on("click",function toggle(){
+          var ele = document.getElementById("find_link");
+            var text = document.getElementById("findlink");
+            if(ele.style.display == "block"){
+                ele.style.display = "none";
+                text.innerHTML = "Search A Link";
+            }
+            else {
+                ele.style.display = "block";
+                text.innerHTML = "Hide Form";
+            }
 
+    });
+           
+   
     $('#new_link').on('submit', function(e) {
          e.preventDefault();
         var title = $('#title').val();

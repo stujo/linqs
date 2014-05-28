@@ -2,7 +2,7 @@ class LinksController < ApplicationController
 
   before_action :find_link , only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, :except => [:index, :show]
-
+  
 
   # will eventually display all public links via ajax get request
 
