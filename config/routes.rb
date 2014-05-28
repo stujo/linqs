@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   root 'links#index'
   
+  namespace :api do
+    resources :tests
+  end
   resources :links, :tags, :comments
 
   # get '/signup', to: 'users#new'
