@@ -6,8 +6,8 @@
       <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
       <%= csrf_meta_tags %>
   
-  <div id= "container", class="container-fluid">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div id= "header-container", class="container-fluid">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class= "navbar_header">
          <a class="logo" href="#">Linqs</a>
          <li>
@@ -24,14 +24,17 @@
               <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
           <% end %>
       </div> 
+       <ul class="nav nav-tabs">
+          <li><a href="/links">Home</a></li>
+          <li><a href="#">about</a></li>
+      </ul>
     </nav>        
   </div>
   
- 
-  </head>
-  <body>
+</head>
+<body>
 
-      <%= yield %>
+  <%= yield %>
    
-  </body>
+</body>
 </html>
