@@ -1,32 +1,28 @@
 
-<head>
- <h2> Links Index Page </h2>
+
+ <h2> Welcome To The Linqs App </h2>
+
+<a id="displayText", href="javascript:toggle();">Add a link</a>
 
 <form id="new_link">
-<input type="text" id="title" placeholder="Title" >
-<input type="text" id="url" placeholder="URL">
-<input type="text" id="name" placeholder="tag">
-<input type="submit"  >
+    <input type="text" id="title" placeholder="Title" >
+    <input type="text" id="url" placeholder="URL">
+    <input type="text" id="name" placeholder="tag">
+    <input type="submit"  >
 </form>
 
 <br>
-Public Links
+<b>Public Links:</b>
 <ul id="publiclist">
 <% @links.each do |link| %>
+
     <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>
 	
-	<ul class= " links_list">
-	  <li>
-		<%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>	</li>
-	</ul> 
-
 <% end %>
 </ul>
 
-<% if current_user != nil %>
+<b>Private Links:</b>
 
-Private Links
-<% end %>
 <ul id="privatelist">
 <% @linksprivate.each do |link| %>
     <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>
@@ -37,6 +33,23 @@ Private Links
 
 
 $(document).ready(function() {
+   
+
+    $("#displayText").on("click",function toggle(){
+          var ele = document.getElementById("new_link");
+            var text = document.getElementById("displayText");
+            if(ele.style.display == "block"){
+                ele.style.display = "none";
+                text.innerHTML = "Add A Link";
+            }
+            else {
+                ele.style.display = "block";
+                text.innerHTML = "Hide Form";
+            }
+
+    });
+
+
     $('#new_link').on('submit', function(e) {
          e.preventDefault();
         var title = $('#title').val();
@@ -97,8 +110,8 @@ var newLink =  $('<a href="/links/' +data.id + '/edit">edit</a> <a data-method="
             $('#link_tags_name').val("");
         }
     });
+
 });
 
 </script>
-
 

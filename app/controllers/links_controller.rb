@@ -22,13 +22,6 @@ def index
     link.tags.each do |tag|
     link_tags.push(tag.name)
       end
-          #pushes everything that is "not private" into the array
-          if link_tags.include?("private") == false
-            @links.push(link)
-          #if private && the creator of link  does not equal current user - do not show
-            else link_tags.include?("private") == true # && currentuser = owner of the link
-            @linksprivate.push(link)
-          end 
 
       #pushes everything that is "not private" into the array
       if !link_tags.include?("private")
@@ -41,7 +34,6 @@ def index
       else
           flash[:errors] = "You're not logged in sucka!!!"
       end 
-
     end
         respond_to do |format|
           format.html

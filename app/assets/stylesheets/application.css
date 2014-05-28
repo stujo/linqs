@@ -15,7 +15,12 @@
  *= require bootstrap.css
  */
 
- 
+ #displayText {
+ 	display: block;
+ }
+ #new_link {
+ 	display: none;
+ }
   body { 
   padding: 3em 5em; 
   background: #EEE8D5; 
