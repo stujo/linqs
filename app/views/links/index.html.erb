@@ -3,6 +3,9 @@
 
  <h2> Welcome To The Linqs App </h2>
 
+<a id="displayText", href="javascript:toggle();">Add a link</a>
+
+
 <form id="new_link">
     <input type="text" id="title" placeholder="Title" >
     <input type="text" id="url" placeholder="URL">
@@ -34,6 +37,23 @@
 
 
 $(document).ready(function() {
+   
+
+    $("#displayText").on("click",function toggle(){
+          var ele = document.getElementById("new_link");
+            var text = document.getElementById("displayText");
+            if(ele.style.display == "block"){
+                ele.style.display = "none";
+                text.innerHTML = "Add A Link";
+            }
+            else {
+                ele.style.display = "block";
+                text.innerHTML = "Hide Form";
+            }
+
+    });
+
+
     $('#new_link').on('submit', function(e) {
          e.preventDefault();
         var title = $('#title').val();
@@ -94,6 +114,7 @@ var newLink =  $('<a href="/links/' +data.id + '/edit">edit</a> <a data-method="
             $('#link_tags_name').val("");
         }
     });
+
 });
 
 </script>
