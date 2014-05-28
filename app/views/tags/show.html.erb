@@ -1,12 +1,12 @@
-<h1>TAGS SHOW PAGE</h1>
-<h2>We will remove for single-page index and show</h2>
-
-<%= @name %><br>
- <!-- This breaks when user inputs a url without http://www....need validations/templates  -->
+<h1> All Links Tagged With "<%= @tag.name %>"</h1>
 
 <%= link_to "edit", edit_tag_path(@tag)%> <%= link_to "delete", tag_path(@tag), method: :delete %>
 
 <h3>Links:</h3>
-<%= link_to "Back to the home page", links_path %>
-Links gO hErE wooo
+<% @tag.links.each do |link| %>
+	<b><%= link.title.capitalize %>:</b>	<%= link_to link.url, link.url %>
+<% end %>
+
+<p><%= link_to "Back to the home page", links_path %></p>
+
 
