@@ -22,12 +22,6 @@ class TagsController < ApplicationController
 
   def show
     @tag = Tag.find(params[:id])
-    # find all link_ids assoc'd with tag_id in link_tags
-    @links = []
-binding.pry
-    @tag.link_tags.find_by(tag_id: @tag.id).each do |link|
-      @links.push(link)
-      end
   end
 
   def edit

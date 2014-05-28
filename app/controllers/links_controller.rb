@@ -58,7 +58,12 @@ class LinksController < ApplicationController
     # # if it doesn't, save new link to the db
     # else
       @link = current_user.links.new(title: links_params[:title], url: links_params[:url])
-      @link.save
+      if @link.url.include?("http://")
+        @link.save
+      else
+        @link.url.insert(0, "http://")
+        @link.save
+      end
       # Decide if tag is already in the database
       @potentialTag = Tag.find_by(name: links_params[:link_tags_attributes]["0"][:tag_attributes][:name])
         # if tag is already in db, create a new association btween new link and old tag
