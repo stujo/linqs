@@ -118,8 +118,8 @@ class LinksController < ApplicationController
     def links_params
       params.require(:link).permit(:title, :url, :link_tags_attributes => [:tag_attributes =>[:name]])
     end
-  end
 end
+
 
 
 

@@ -30,7 +30,6 @@ class TagsController < ApplicationController
     @tag = Tag.find(params[:id])
     # find all link_ids assoc'd with tag_id in link_tags
     @links = []
-binding.pry
     @tag.link_tags.find_by(tag_id: @tag.id).each do |link|
       @links.push(link)
       end
@@ -52,12 +51,12 @@ binding.pry
     redirect_to root_path
   end
 
-
   private
-  def find_tag
-    @tag = Tag.find(params[:id])
-  end
-  def tags_params
-    params.require(:tag).permit(:name)
-  end
+    def find_tag
+      @tag = Tag.find(params[:id])
+    end
+
+    def tags_params
+      params.require(:tag).permit(:name)
+    end
 end
