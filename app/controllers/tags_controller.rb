@@ -2,7 +2,11 @@ class TagsController < ApplicationController
   before_action :find_tag, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tags = Tag.all
+    @tags = Tag.all.order(:name)
+    respond_to do |format|
+      format.html
+      format.json { render :json => {:tags => @tags.as_json}}
+    end
   end
 
   def new
