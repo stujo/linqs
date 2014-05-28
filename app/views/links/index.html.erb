@@ -1,6 +1,5 @@
 
 
-
  <h2> Welcome To The Linqs App </h2>
 
 <a id="displayText", href="javascript:toggle();">Add a link</a>
@@ -15,7 +14,7 @@
 </form>
 <form id="find_link">
     <input type="text" id="search_key" placeholder="Search ..">
-    <input type="submit", tag_path >
+    <input type="submit">
 </form>
 
        
@@ -51,100 +50,97 @@
 
 <script type="text/javascript">
 
+    $(document).ready(function() {
+        $("#displayText").on("click",function toggle(){
+              var ele = document.getElementById("new_link");
+                var text = document.getElementById("displayText");
+                if(ele.style.display == "block"){
+                    ele.style.display = "none";
+                    text.innerHTML = "Add A Link";
+                }
+                else {
+                    ele.style.display = "block";
+                    text.innerHTML = "Hide Form";
+                }
 
-$(document).ready(function() {
+        });
 
+        $("#findlink").on("click",function toggle(){
+              var ele = document.getElementById("find_link");
+                var text = document.getElementById("findlink");
+                if(ele.style.display == "block"){
+                    ele.style.display = "none";
+                    text.innerHTML = "Search A Link";
+                }
+                else {
+                    ele.style.display = "block";
+                    text.innerHTML = "Hide Form";
+                }
 
-    $("#displayText").on("click",function toggle(){
-          var ele = document.getElementById("new_link");
-            var text = document.getElementById("displayText");
-            if(ele.style.display == "block"){
-                ele.style.display = "none";
-                text.innerHTML = "Add A Link";
-            }
-            else {
-                ele.style.display = "block";
-                text.innerHTML = "Hide Form";
-            }
+        });
+               
+       
+        $('#new_link').on('submit', function(e) {
+             e.preventDefault();
+            var title = $('#title').val();
+            var url = $('#url').val();
+            var tag = $('#name').val();
 
-    });
-
-    $("#findlink").on("click",function toggle(){
-          var ele = document.getElementById("find_link");
-            var text = document.getElementById("findlink");
-            if(ele.style.display == "block"){
-                ele.style.display = "none";
-                text.innerHTML = "Search A Link";
-            }
-            else {
-                ele.style.display = "block";
-                text.innerHTML = "Hide Form";
-            }
-
-    });
-           
-   
-    $('#new_link').on('submit', function(e) {
-         e.preventDefault();
-        var title = $('#title').val();
-        var url = $('#url').val();
-        var tag = $('#name').val();
-
-   
-        if (!title.length) {
-            return;
-        } else { // send user input to json
-            $.ajax({
-                url: '/links',
-                method: 'post',
-                data: {
-                    "link": {
-                        "title": title,
-                        "url": url,
-                        "link_tags_attributes": {
-                            "0": {
-                              "tag_attributes": {
-                                "name": tag
+       
+            if (!title.length) {
+                return;
+            } else { // send user input to json
+                $.ajax({
+                    url: '/links',
+                    method: 'post',
+                    data: {
+                        "link": {
+                            "title": title,
+                            "url": url,
+                            "link_tags_attributes": {
+                                "0": {
+                                  "tag_attributes": {
+                                    "name": tag
+                                    }
                                 }
                             }
                         }
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        console.log(data);
+                         var publiclist = $('#publiclist')
+                         var privatelist = $('#privatelist')
+                         console.log(data.title);
+                         console.log(data.url);
+
+
+    var newLink =  $('<a href="/links/' +data.id + '/edit">edit</a> <a data-method="delete" href="/links/' + data.id + '" rel="nofollow">delete</a> <b>' + data.title + '</b> - <a href="' + data.url + '">' + data.url + '</a> <br>')
+                         // var newLink = $('<li><span class="edit">edit</span>' + " " + '<span class="delete">delete </span><b>' + data.title + ' - </b> ' + data.url + ' <b>Tags:</b> ' + data.tags[0].name + '</li>');
+                         // var LinkwithButtons = $('<span class="delete">delete</span><span class="edit">edit</span>' + newLink);
+                         console.log(newLink);
+                         // newLink.prepend('<span class="delete">delete</span><span class="edit">edit</span>' +);
+                         // newLink.hide().appendTo('publiclist').fadeIn(500);
+                        if (data.tags[0].name === "private") {
+                            privatelist.prepend(newLink) 
+                        }
+                        else {
+                            publiclist.prepend(newLink) 
+                        };
+
+                    },
+                    //return false;
+                    error: function(data) {
+                        console.log(data.responseText);
+                        alert("Yo its broke");
                     }
-                },
-                dataType: "json",
-                success: function(data) {
-                    console.log(data);
-                     var publiclist = $('#publiclist')
-                     var privatelist = $('#privatelist')
-                     console.log(data.title);
-                     console.log(data.url);
-
-
-var newLink =  $('<a href="/links/' +data.id + '/edit">edit</a> <a data-method="delete" href="/links/' + data.id + '" rel="nofollow">delete</a> <b>' + data.title + '</b> - <a href="' + data.url + '">' + data.url + '</a> <br>')
-                     // var newLink = $('<li><span class="edit">edit</span>' + " " + '<span class="delete">delete </span><b>' + data.title + ' - </b> ' + data.url + ' <b>Tags:</b> ' + data.tags[0].name + '</li>');
-                     // var LinkwithButtons = $('<span class="delete">delete</span><span class="edit">edit</span>' + newLink);
-                     console.log(newLink);
-                     // newLink.prepend('<span class="delete">delete</span><span class="edit">edit</span>' +);
-                     // newLink.hide().appendTo('publiclist').fadeIn(500);
-                    if (data.tags[0].name === "private") {
-                        privatelist.prepend(newLink) 
-                    }
-                    else {
-                        publiclist.prepend(newLink) 
-                    };
-
-                },
-                //return false;
-                error: function(data) {
-                    console.log(data.responseText);
-                    alert("Yo its broke");
-                }
-            });
-            $('#link_title').val("");
-            $('#link_url').val("");
-            $('#link_tags_name').val("");
-        }
-    });
-
+                });
+                $('#link_title').val("");
+                $('#link_url').val("");
+                $('#link_tags_name').val("");
+            }
+        });
+    };
 
 </script>
 
