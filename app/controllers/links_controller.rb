@@ -31,10 +31,8 @@ class LinksController < ApplicationController
           if link_tags.include?("private") == true && link.user_id == current_user.id
             @linksprivate.push(link)
           end
-      elsif 
-
-        
-          flash[:errors] = "You're not logged in sucka!!!"
+     # elsif
+      #    flash[:errors] = "You're not logged in sucka!!!"
       
       else
           flash[:errors] = "You're not logged in sucka!!!"
