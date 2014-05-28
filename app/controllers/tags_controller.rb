@@ -20,6 +20,7 @@ class TagsController < ApplicationController
       flash[:errors] = @tag.errors.full_messages
     end
   end
+  
 
   def show
    # @tag = Tag.find(params[:id])
