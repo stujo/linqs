@@ -4,5 +4,5 @@
 <%= link_to "Add a tag", new_tag_path %><br>
 
 <% @tags.each do |tag| %>
-	<%= link_to "edit", edit_tag_path(tag)%> <%= link_to "delete", tag_path(tag), method: :delete %>  <b><%= tag.name %></b>  <br>
+	<%= link_to "edit", edit_tag_path(tag)%> <%= link_to "delete", tag_path(tag), method: :delete %>  <b><%= link_to tag.name, tag_path(tag.id) %></b>  <br>
 <% end %>
