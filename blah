@@ -1,0 +1,16 @@
+HTTP/1.1 302 Found 
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Location: http://localhost:3000/
+Content-Type: text/html; charset=utf-8
+Cache-Control: no-cache
+X-Request-Id: 530a35a1-b7ed-4851-b194-dd87257278a8
+X-Runtime: 0.082288
+Server: WEBrick/1.3.1 (Ruby/2.0.0/2014-02-24)
+Date: Thu, 29 May 2014 04:16:59 GMT
+Content-Length: 88
+Connection: Keep-Alive
+Set-Cookie: request_method=POST; path=/
+Set-Cookie: _linqs_session=ekJIbndyYmZNWnRNL0NVYzRSWUk0cDgwUXFYM2x2NEd6dEhxQW9YUkc2cmovVjhBaW51TVpZWTM5RVVnZ0tZak4ycHN2cUVpUG9ZMjhXUE40bytESmExSm9lZncwaEg4akpnQzdQdk9kVmxLa1I0M0dseDM0VjBsMS96OXFYQnBhYUF1c3J0bUFuODhsZVFGNE9JdndJTFZvL3lWa0ZqVmoxZmpoTi9yTDJNb09Tc0JhT2JXK0lCUmVFcXZNYzkwRmVob3BWMUtrazZPNWZaUHg5OXNrQlErL0x1S3BIMEk4N0ZkdHpaSlRSUkFDR2hveGkreEYwaFlYWTFiWW42Wi0tRVErZlh1Rm5adEt5VHhhWS9TTUV4dz09--55e2c45c85cee8f970ed22f489f4f510c5c7e27a; path=/; HttpOnly
+

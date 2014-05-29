@@ -1,5 +1,5 @@
 THIS IS THE INDEX PAGE FOR ALL THE COMMENTS
 <br>
 <% @comments.each do |comment| %>
-	<b><%= comment.commentable_type %> - </b><%= comment.commentable_id %></b> - <%= comment.content %><br>
+<b><%= comment.commentable_type %> - </b><%= comment.commentable_id %></b> - <%= comment.content %><br>
 <% end %>

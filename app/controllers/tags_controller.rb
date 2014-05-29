@@ -16,7 +16,6 @@ class TagsController < ApplicationController
 
   def create
     @tag = Tag.new(tags_params)
-
     if @tag.save
       redirect_to tag_path(@tag)
     else
@@ -33,7 +32,7 @@ class TagsController < ApplicationController
     @links = []
     @tag.link_tags.find_by(tag_id: @tag.id).each do |link|
       @links.push(link)
-      end
+    end
   end
 
   def update
@@ -53,11 +52,11 @@ class TagsController < ApplicationController
   end
 
   private
-    def find_tag
-      @tag = Tag.find(params[:id])
-    end
+  def find_tag
+    @tag = Tag.find(params[:id])
+  end
 
-    def tags_params
-      params.require(:tag).permit(:name)
-    end
+  def tags_params
+    params.require(:tag).permit(:name)
+  end
 end
