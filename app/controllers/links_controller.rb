@@ -5,12 +5,19 @@ class LinksController < ApplicationController
 
 
   # will eventually display all public links via ajax get request
+  def sort_by_title
+    @links = Link.all.order(:title)
+    both = separate_public_and_private(links)
+    link_pub = both.first
+    link_priv = both.last
 
-  def index
-    # makes a new instance of Link
-    @link = Link.new
-    links = Link.all.order(:created_at).reverse_order
+    respond_to do |format|
+      format.html
+      format.json { render :json => {:links => link_pub.as_json}}
+    end
+  end
 
+  def separate_public_and_private(links)
     #creates an empty array for public and private links
     @links = []
     @linksprivate = []
@@ -35,9 +42,21 @@ class LinksController < ApplicationController
         flash[:errors] = "You're not logged in sucka!!!"
       end
     end
+    return [@links, @linksprivate]
+  end
+
+  def index
+    # makes a new instance of Link
+    @link = Link.new
+    links = Link.all.order(:updated_at).reverse_order
+
+    both = separate_public_and_private(links)
+    link_pub = both.first
+    link_priv = both.last
+
     respond_to do |format|
       format.html
-      format.json { render :json => {:links => @links.as_json}}
+      format.json { render :json => {:links => link_pub.as_json}}
     end
   end
 
