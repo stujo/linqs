@@ -4,7 +4,10 @@ class Tag < ActiveRecord::Base
   has_many :links, through: :link_tags
 
    def self.search(search)
-  	search_condition = "%" + search + "%"
-  	find(:all, :conditions => ['name like ? ', search_condition])
-  end
+	  	if search
+	  		where('name LIKE ?', "%#{search}%")
+	  	else
+	  		scoped
+	  	end
+    end
 end

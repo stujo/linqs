@@ -6,3 +6,6 @@
 <% @tags.each do |tag| %>
 	<%= link_to "edit", edit_tag_path(tag)%> <%= link_to "delete", tag_path(tag), method: :delete %>  <b><%= tag.name %></b>  <br>
 <% end %>
+
+
+ 

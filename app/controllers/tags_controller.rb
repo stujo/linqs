@@ -3,7 +3,7 @@ class TagsController < ApplicationController
  validates :name , presence: true
  
   def index
-    @tags = Tag.all
+    @tags = Tag.search(params[:search]).paginate(:per_page => 20, :page => params[:page])
   end
 
   def new

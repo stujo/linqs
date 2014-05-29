@@ -17,10 +17,21 @@
 
  #displayText {
  	display: block;
+ 	margin-left: 7px;
  }
  #new_link {
  	display: none;
+ 	margin-left: 7px;
  }
+ #find_link {
+ 	display: none;
+ 	margin-left: 7px;
+ }
+ #findlink {
+ 	display: block;
+ 	margin-left: 7px;
+ }
+
   body { 
   padding-top: 70px;  
   background: #EEE8D5; 
@@ -57,11 +68,8 @@
   padding-top: 20px;
   padding-bottom:20px;
 }
-#new_link {
-  
-}
-#find_link{
-
+#home {
+	margin-left: 10px;
 }
 
 
