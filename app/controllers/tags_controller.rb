@@ -26,7 +26,6 @@ class TagsController < ApplicationController
 
   def show
     # @tag = Tag.find(params[:id])
-    @name = @tag.name
   end
 
   def edit

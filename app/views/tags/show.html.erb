@@ -1,12 +1,10 @@
 <h1> All Links Tagged With "<%= @tag.name %>"</h1>
 
-<%= link_to "edit", edit_tag_path(@tag)%> <%= link_to "delete", tag_path(@tag), method: :delete %>
-
-<h3>Links:</h3>
+<p><%= link_to "Home", links_path, :class => "btn btn-primary" %></p>
 <% @tag.links.each do |link| %>
-	<b><%= link.title.capitalize %>:</b>	<%= link_to link.url, link.url %>
+	<b><%= link.title.capitalize %>:</b>	<%= link_to link.url, link.url %><br>
 <% end %>
 
-<p><%= link_to "Back to the home page", links_path %></p>
+
 
 
