@@ -1,6 +1,8 @@
 <h2> Welcome To The Linqs App </h2>
 <%= link_to "Browse All Tags", tags_path %>
 <a id="displayText", href="javascript:toggle();">Add a link</a>
+<a id="findlink", href="javascript:toggle();">Search For Link</a>
+<!-- find link is currently hidden -->
 <br>
 <form id="new_link">
     <input type="text" id="title" placeholder="Title" >
@@ -8,9 +10,19 @@
     <input type="text" id="name" placeholder="tag">
     <input type="submit"  >
 </form>
+
+<form id="find_link">
+    <input type="text" id="search_key" placeholder="Search ..">
+    <input type="submit">
+</form>
+<!-- find link form -->
 <br>
 <br>
-<b>Public Links:</b>
+ <div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Public Links:</h3>
+  </div>
+  <div class="panel-body">
 <ul id="publiclist">
     <% @links.each do |link| %>
     <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <b>Tagged: </b>
@@ -19,7 +31,15 @@
     <% end %><br>
     <% end %>
 </ul>
-<b>Private Links:</b>
+</div>
+</div> 
+<!-- end of public links -->
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Private Links:</h3>
+  </div>
+  <div class="panel-body">   
 <ul id="privatelist">
     <% @linksprivate.each do |link| %>
     <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> Tagged:
@@ -28,6 +48,8 @@
     <% end %><br>
     <% end %>
 </ul>
+ </div>
+</div>
 <script type="text/javascript">
     $(document).ready(function () {
 

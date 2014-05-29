@@ -1,20 +1,20 @@
 <h1>LINKS NEW PAGE</h1>
 <h2>WE WILL REMOVE This to allow for AJAX CALLS ON MAIN PAGE</h2>
-<%= form_for @link do |f| %>
-<%= f.text_field :title, placeholder: "Name This Link" %><br>
-<%= f.text_area :url, placeholder: "Paste URL here" %><br>
+  <%= form_for @link do |f| %>
+  <%= f.text_field :title, placeholder: "Name This Link" %><br>
+  <%= f.text_area :url, placeholder: "Paste URL here" %><br>
 <br>
-<b>
-<%=f.fields_for :link_tags do |link_tags_form| %>
-Tags:
+  <b>
+  <%=f.fields_for :link_tags do |link_tags_form| %>
+  Tags:
 <br>
-<%=link_tags_form.fields_for :tag do |tags_form| %>
-<%= tags_form.label :name %>
-<%= tags_form.text_field :name %>
+  <%=link_tags_form.fields_for :tag do |tags_form| %>
+  <%= tags_form.label :name %>
+  <%= tags_form.text_field :name %>
 <br>
 <% end %>
-<%= f.submit class: "btn btn-primary" %>
+  <%= f.submit class: "btn btn-primary" %>
 <% end %>
 <% end %>
 <!-- NEED TO ADD VIEWS THAT ARE EMBEDDED -->
-<%= link_to "Cancel", links_path %>
+  <%= link_to "Cancel", links_path %>
