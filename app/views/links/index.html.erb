@@ -1,21 +1,22 @@
+
 <h2> Welcome To The Linqs App </h2>
 <%= link_to "Browse All Tags", tags_path %>
 <a id="displayText", href="javascript:toggle();">Add a link</a>
 <a id="findlink", href="javascript:toggle();">Search For Link</a>
 <!-- find link is currently hidden -->
 <br>
+
 <form id="new_link">
     <input type="text" id="title" placeholder="Title" >
     <input type="text" id="url" placeholder="URL">
     <input type="text" id="name" placeholder="tag">
     <input type="submit"  >
 </form>
-
 <form id="find_link">
     <input type="text" id="search_key" placeholder="Search ..">
     <input type="submit">
 </form>
-<!-- find link form -->
+
 <br>
 <br>
  <div class="panel panel-default">
@@ -23,17 +24,25 @@
     <h3 class="panel-title">Public Links:</h3>
   </div>
   <div class="panel-body">
-<ul id="publiclist">
-    <% @links.each do |link| %>
-    <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <b>Tagged: </b>
-    <% link.tags.each do |tag| %>
-    <%= link_to tag.name, tag_path(tag) %>
-    <% end %><br>
-    <% end %>
-</ul>
+   <table class="table table-hover"
+    <ul id="publiclist">
+        <% @links.each do |link| %> 
+        <b><%= link.title %></b> 
+          <%= link_to "comment", link_comments_path(link)%>
+               - <%= link_to "edit", edit_link_path(link)%> - <%= link_to "delete", link_path(link),method: :delete %>   
+                Likes <%= link.upvotes %>
+                Dislikes <%= link.downvotes %>
+                <a href="<%=link.url%>"><%= @link.url %></a>
+                <%= link_to "Like", "/links/vote/upvote/#{link.id}", :class => 'btn btn-success' %>
+                <%= link_to "Dislike", "/links/vote/downvote/#{link.id}", :class => 'btn btn-success' %> <br><%= link_to link.url, link.url %> <br> <br>
+                Tagged: <% link.tags.each do |tag| %>
+                <%= link_to tag.name, tag_path(tag) %>
+                <% end %><br>
+        <% end %>
+     </ul>
+    </table>
+  </div>
 </div>
-</div> 
-<!-- end of public links -->
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -50,6 +59,12 @@
 </ul>
  </div>
 </div>
+
+
+
+
+
+
 <script type="text/javascript">
     $(document).ready(function () {
 

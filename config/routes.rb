@@ -1,16 +1,23 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'links#index'
+  get '/links/vote/upvote/:id',   to: 'links#up_vote'
+  get '/links/vote/downvote/:id', to: 'links#down_vote'
   
-  namespace :api do
-    resources :tests
-  end
-  resources :links, :tags, :comments
+  # namespace :api do
+  #   resources :tests
+  # end
+   resources :tags
+   resources :links do 
+      resources :comments
+   end
+
+ end
 
   # get '/signup', to: 'users#new'
   # delete '/signout', to: 'sessions#destroy'
   # get'/signin', to: 'sessions#new'
-end
+
 
 #       Prefix Verb   URI Pattern                  Controller#Action
 #         root GET    /                            links#index

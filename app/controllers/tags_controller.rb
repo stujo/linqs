@@ -3,11 +3,12 @@ class TagsController < ApplicationController
 
   def index
     @tags = Tag.all.order(:name)
+    #@tags = Tag.search(params[:search]).paginate(:per_page => 20, :page => params[:page])
+
     respond_to do |format|
       format.html
       format.json { render :json => {:tags => @tags.as_json}}
     end
-  end
 
   def new
     @tag = Tag.new
@@ -22,6 +23,7 @@ class TagsController < ApplicationController
       flash[:errors] = @tag.errors.full_messages
     end
   end
+  
 
   def show
     # @tag = Tag.find(params[:id])
@@ -43,7 +45,6 @@ class TagsController < ApplicationController
       render :edit
     end
   end
-
 
   def destroy
     #@tag = Tag.find(params[:id])
