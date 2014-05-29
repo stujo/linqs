@@ -1,15 +1,12 @@
 <h1>LINKS SHOW PAGE</h1>
 <h2>We will remove for single-page index and show</h2>
-
 <%= @title %><br>
-<%= link_to @url, @url %><br> 
+<%= link_to @url, @url %><br>
 <!-- This breaks when user inputs a url without http://www....need validations/templates  -->
-
 <%= link_to "edit", edit_link_path(@link)%> <%= link_to "delete", link_path(@link), method: :delete %>
 <%= link_to "Back", links_path(@link)%>
-
 <h3>Tags:</h3>
-	<% @link.tags.each do |tag| %>
-		<%=tag.name %>
-	<% end %>
+<% @link.tags.each do |tag| %>
+<%=tag.name %>
+<% end %>
 
