@@ -95,7 +95,6 @@ class LinksController < ApplicationController
   def edit
     @link_tag = @link.link_tags.build
     @link_tag.build_tag
-
     @link = Link.find(params[:id])
   end
 
