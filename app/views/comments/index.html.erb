@@ -6,10 +6,6 @@
 <%= link_to "Dislike", "/links/vote/downvote/#{@link.id}", :class => 'btn btn-success' %>
 
 <% @comments.each do |comment| %>
-<<<<<<< HEAD
-<b><%= comment.commentable_type %> - </b><%= comment.commentable_id %></b> - <%= comment.content %><br>
-<% end %>
-=======
 <li><%= comment.content %></li>
   <% if comment.user %>
     <li>Commenter: <%= comment.user.email %></li><br>
@@ -17,10 +13,6 @@
     <% %>
   <% end %>
 <% end %>
-
 <!-- Display all of the comments for this link -->
 
 <%= link_to "Comment on this link", new_link_comment_path(@link) %>
-
-<!-- Link to add a new comment to this link -->
->>>>>>> 48290b8528a11f42af859fd758027a4bd5243175

@@ -5,13 +5,5 @@
 <br>
 
 <% @tags.each do |tag| %>
-<<<<<<< HEAD
 	<%= link_to tag.name, tag_path(tag.id) %><br>
 <% end %>
-=======
-	<%= link_to "edit", edit_tag_path(tag)%> <%= link_to "delete", tag_path(tag), method: :delete %>  <b><%= tag.name %></b>  <br>
-<% end %>
-
-
- 
->>>>>>> 48290b8528a11f42af859fd758027a4bd5243175

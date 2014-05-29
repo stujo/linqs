@@ -47,8 +47,6 @@ railslink44 = Link.create!(:title => "HTML CSS", :url => "https://draftin.com/do
 railslink45 = Link.create!(:title => "Mini-Project-HappiTails", :url => "https://github.com/wdi-sf-march-2014/Sinatra-Movie-App-Part-Deux-Mini-Project/tree/master")
 railslink46 = Link.create!(:title => "Warm up Binary Search", :url => "https://github.com/wdi-sf-march-2014/notes/tree/master/WarmUps/Methods/BinarySearch")
 
-<<<<<<< HEAD
-
 
 railslink1.tags.create!(:name => "Rails Guide")
 railslink2.tags.create!(:name => "stackoverflow")
@@ -103,8 +101,6 @@ railslink6.tags.create!(:name => "Intro to Algorithms")
 railslink7.tags.create!(:name => "Algorithms lab")
 railslink8.tags.create!(:name => "private")
 railslink9.tags.create!(:name => "Blocks & Iterators")
-=======
-
 
 railslink1.tags.create!(:name => "Rails Guide")
 railslink2.tags.create!(:name => "stackoverflow")
@@ -151,16 +147,6 @@ railslink43.tags.create!(:name => "Sinatra2")
 railslink44.tags.create!(:name => "HTML CSS")
 railslink45.tags.create!(:name => "Mini-Project-HappiTails")
 railslink46.tags.create!(:name => "Warm up Binary Search")
-
-
-
-# tag = Tag.create!(:name => "ruby")
-# Tag.create!(:name => "arrays")
-# Tag.create!(:name => "hashes")
-# Tag.create!(:name => "sinatra")
-# Tag.create!(:name => "rspec")
-# Tag.create!(:name => "javascript")
->>>>>>> 48290b8528a11f42af859fd758027a4bd5243175
 
 commenta = railslink1.comments.create!(:content => "Shaq is awesome")
 commentb = railslink2.comments.create!(:content => "Taylor likes to be the boss")

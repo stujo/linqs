@@ -10,19 +10,12 @@ class LinksController < ApplicationController
     both = separate_public_and_private(links)
     link_pub = both.first
     link_priv = both.last
-
-<<<<<<< HEAD
     respond_to do |format|
       format.html
       format.json { render :json => {:links => link_pub.as_json}}
     end
   end
-=======
-def index
-  # makes a new instance of Link
-    @link = Link.new
-    links = Link.all.order(:upvotes).reverse_order
->>>>>>> 48290b8528a11f42af859fd758027a4bd5243175
+
 
   def separate_public_and_private(links)
     #creates an empty array for public and private links
@@ -55,7 +48,7 @@ def index
   def index
     # makes a new instance of Link
     @link = Link.new
-    links = Link.all.order(:updated_at).reverse_order
+    links = Link.all.order(:upvotes).reverse_order
 
     both = separate_public_and_private(links)
     link_pub = both.first
@@ -130,21 +123,6 @@ def index
     end
   end
 
-<<<<<<< HEAD
-  def destroy
-    @link.destroy
-    redirect_to root_path
-  end
-
-
-  private
-  def find_link
-    @link = Link.find(params[:id])
-  end
-
-  def links_params
-    params.require(:link).permit(:title, :url, :link_tags_attributes => [:tag_attributes =>[:name]])
-=======
    def up_vote
     session[:return_to] ||= request.referer
     @link = Link.find(params[:id])
@@ -172,6 +150,4 @@ def index
     def links_params
       params.require(:link).permit(:title, :url, :link_tags_attributes => [:tag_attributes =>[:name]])
     end
->>>>>>> 48290b8528a11f42af859fd758027a4bd5243175
-  end
 end
