@@ -1,10 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or create!d alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create!([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create!(name: 'Emanuel', city: cities.first)
+
 railslink1 = Link.create!(:title => "Rails Guide", :url => "http://www.railsguide.com")
 
 railslink2 = Link.create!(:title => "Stack Overflow", :url => "http://www.stackoverflow.com")
@@ -34,7 +28,7 @@ railslink25 = Link.create!(:title => "Rental App Code Along", :url => "https://g
 railslink26 = Link.create!(:title => "Quiz1", :url => "https://gist.github.com/spencereldred/899def2ee94cf769dfc9")
 railslink27 = Link.create!(:title => "Tic Tac Toe lab", :url => "https://draftin.com/documents/299516?token=EfREJQIsHxwJabU7LZ2OUf7wHTpdf4jcySlbdHzSc1eOQlOJ2MDefQdxACK8fzfV_1uy4d-GR8IJ-h5zlNcn1Y8")
 railslink28 = Link.create!(:title => "Rspec Lesson note", :url => "https://github.com/wdi-sf-march-2014/notes/blob/master/rspec/rspec_tests_revised.md")
-railslink29 = Link.create!(:title => "Rspec lesson lab", :url => "https://github.com/wdi-sf-march-2014/notes/tree/master/rspec/lab"
+railslink29 = Link.create!(:title => "Rspec lesson lab", :url => "https://github.com/wdi-sf-march-2014/notes/tree/master/rspec/lab")
 railslink30 = Link.create!(:title => "Intro to Algorithms", :url => "https://github.com/wdi-sf-march-2014/notes/blob/master/IntroToAlgorithms/IntroToAlgorithms.md")
 railslink31 = Link.create!(:title => "Algorithms lab", :url => "https://github.com/wdi-sf-march-2014/algorithms-ruby-lab")
 railslink32 = Link.create!(:title => "Warm up Exercise-Palindromes", :url => "https://gist.github.com/DelmerGA/10742738")
@@ -103,14 +97,14 @@ railslink46.tags.create!(:name => "Warm up Binary Search")
 
 
 
-tag = Tag.create!(:name => "ruby")
-Tag.create!(:name => "arrays")
-Tag.create!(:name => "hashes")
-Tag.create!(:name => "sinatra")
-Tag.create!(:name => "rspec")
-Tag.create!(:name => "javascript")
+# tag = Tag.create!(:name => "ruby")
+# Tag.create!(:name => "arrays")
+# Tag.create!(:name => "hashes")
+# Tag.create!(:name => "sinatra")
+# Tag.create!(:name => "rspec")
+# Tag.create!(:name => "javascript")
 
-commenta = railslink.comments.create!(:content => "Shaq is awesome")
+commenta = railslink1.comments.create!(:content => "Shaq is awesome")
 commentb = railslink2.comments.create!(:content => "Taylor likes to be the boss")
 commentc = railslink2.comments.create!(:content => "The team is becoming awesome")
 commentd = commenta.comments.create!(:content => "Rahul needs to calm down")

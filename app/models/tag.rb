@@ -3,11 +3,5 @@ class Tag < ActiveRecord::Base
   has_many :link_tags
   has_many :links, through: :link_tags
 
-   def self.search(search)
-	  	if search
-	  		where('name LIKE ?', "%#{search}%")
-	  	else
-	  		scoped
-	  	end
-    end
+  validates :name, presence: true, length: {minimum: 3}
 end

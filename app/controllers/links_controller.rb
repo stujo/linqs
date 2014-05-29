@@ -9,7 +9,7 @@ class LinksController < ApplicationController
 def index
   # makes a new instance of Link
     @link = Link.new
-    links = Link.all.order(:created_at).reverse_order
+    links = Link.all.order(:upvotes).reverse_order
 
   #creates an empty array for public and private links
     @links = []
@@ -41,6 +41,7 @@ def index
         end
 
   end
+ 
 
 # should build new tags associated with the new link - is this working??
   def new
@@ -102,6 +103,21 @@ def index
     end
   end
 
+   def up_vote
+    session[:return_to] ||= request.referer
+    @link = Link.find(params[:id])
+    #@link.votes.create
+    @link.upvotes = @link.upvotes + 1 
+     @link.save
+   redirect_to session.delete(:return_to)
+  end
+  def down_vote
+    session[:return_to] ||= request.referer
+    @link  = Link.find(params[:id])
+    @link.downvotes = @link.downvotes + 1
+    @link.save
+    redirect_to session.delete(:return_to)    
+  end
     def destroy
       @link.destroy
       redirect_to root_path

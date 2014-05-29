@@ -21,11 +21,20 @@
     <h3 class="panel-title">Public Links:</h3>
   </div>
   <div class="panel-body">
+   <table class="table table-hover"
     <ul id="publiclist">
-        <% @links.each do |link| %>  
-               <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link),method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>  
+        <% @links.each do |link| %> 
+        <b><%= link.title %></b> 
+          <%= link_to "comment", link_comments_path(link)%>
+               - <%= link_to "edit", edit_link_path(link)%> - <%= link_to "delete", link_path(link),method: :delete %>   
+                Likes <%= link.upvotes %>
+                Dislikes <%= link.downvotes %>
+                <a href="<%=link.url%>"><%= @link.url %></a>
+                <%= link_to "Like", "/links/vote/upvote/#{link.id}", :class => 'btn btn-success' %>
+                <%= link_to "Dislike", "/links/vote/downvote/#{link.id}", :class => 'btn btn-success' %> <br><%= link_to link.url, link.url %> <br> <br>
         <% end %>
-    </ul>
+     </ul>
+    </table>
   </div>
 </div>
 
@@ -38,6 +47,8 @@
     <% @linksprivate.each do |link| %>
       <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>
     <% end %>
+
+
     </ul>
  </div>
 </div>

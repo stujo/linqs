@@ -1,5 +1,21 @@
-THIS IS THE INDEX PAGE FOR ALL THE COMMENTS
-<br>
+<h1><%= @link.title %></h1>
+<h3>Likes <%= @link.upvotes %></h3>
+<h3>Dislikes <%= @link.downvotes %></h3>
+<a href="<%=@link.url%>"><%= @link.url %></a>
+<%= link_to "Like", "/links/vote/upvote/#{@link.id}", :class => 'btn btn-success' %>
+<%= link_to "Dislike", "/links/vote/downvote/#{@link.id}", :class => 'btn btn-success' %>
+
 <% @comments.each do |comment| %>
-	<b><%= comment.commentable_type %> - </b><%= comment.commentable_id %></b> - <%= comment.content %><br>
+<li><%= comment.content %></li>
+  <% if comment.user %>
+    <li>Commenter: <%= comment.user.email %></li><br>
+  <% else %>
+    <% %>
+  <% end %>
 <% end %>
+
+<!-- Display all of the comments for this link -->
+
+<%= link_to "Comment on this link", new_link_comment_path(@link) %>
+
+<!-- Link to add a new comment to this link -->
