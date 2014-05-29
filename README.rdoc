@@ -1,27 +1,87 @@
 == README
 
+Linqs is a link repository that will be utilized by General Assembly to store links with tags and comments about content for the WDI Immersive Course.  The product can be used for any use case where links need to be categorized and stored.  The product utilizes tags because its allows one link to be a part of multiple categories.  The user experience allows for a consumer to contribute tags to a public workspace or store their own private links as well (using the private tag feature).
+
+Technologies used in the production of this app include:
+
+Linqs App
+1) ruby 2.1.1p76
+2) Rails 4.1.1
+3) CSS
+4) Javascript
+5) Jquery
+6) HTML5
+7) JSON API Parsing
+
+Hubot
+1) Coffee Script
+2) Reading and Writing to JSON files
+
+You can see the Linqs product in action at http://linqs.herokuapp.com/
+
+Below are the ERD (Entity Relationship Diagrams) for the project
+https://s3.amazonaws.com/uploads.hipchat.com/39979/752428/EQOXXLslLDwERnT/Tags%20Index.png
+https://s3.amazonaws.com/uploads.hipchat.com/39979/752428/CWpbvlivZN7WzYq/Main.png
+https://s3.amazonaws.com/uploads.hipchat.com/39979/752428/JSyKAtCE4mYrjPN/Links%20Index.png
+
+User Stories:
+Linqs
+User can add a link via hipchat bot command
+User can see links based on a specific a tag
+User can create, read, update, destroy a link, tag, or comment
+User can see details of a link without leaving the main page 
+User can login and logout 
+User can set links to be private using the private tag
+User cannot create dupicate tags
+
+Hubot
+User can add links via the bot
+User can retrieve relevant links via the bot
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
 Things you may want to cover:
 
 * Ruby version
+ruby 2.1.1p76
+Rails 4.1.1
 
 * System dependencies
+This has not been tested by our app.
 
-* Configuration
-
+* Configuration in Heroku
+HEROKU DEPLOYMENTS
+  heroku login
+  git add .
+  git commit -m "your commit name"
+  git push
+  bundle install --without production
+  git add gemfile
+  git add gemfile.lock
+  git push heroku master
+  heroku run rake db:migrate
+  heroku config:set SECRET_KEY_BASE=<your secret key>
+  
 * Database creation
+  heroku run rake db:create
+  Requires Postgres 9.3.4.1 (23)
 
 * Database initialization
-
+	heroku run rake db:migrate
+  heroku run rake db:seed
+	
 * How to run the test suite
+	command is "$ RSPEC" from the root directory
 
 * Services (job queues, cache servers, search engines, etc.)
+	Redis-server is required to run the bot
 
 * Deployment instructions
-
-* ...
+	Download from Github
+	Create your own Environment key (rake secret) and add to the env file
+	Push to Heroku
+	For Hubot usage
 
 
 Please feel free to use a different markup language if you do not plan to run
