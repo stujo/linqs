@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+<<<<<<< HEAD
   root 'links#index'
   
   namespace :api do
@@ -10,6 +11,17 @@ Rails.application.routes.draw do
   # get '/signup', to: 'users#new'
   # delete '/signout', to: 'sessions#destroy'
   # get'/signin', to: 'sessions#new'
+=======
+   resources :tags
+   resources :links do 
+  	resources :comments
+  end 
+ 
+root 'links#index'
+get '/links/vote/upvote/:id',   to: 'links#up_vote'
+get '/links/vote/downvote/:id', to: 'links#down_vote'
+ 
+>>>>>>> 48290b8528a11f42af859fd758027a4bd5243175
 end
 
 #       Prefix Verb   URI Pattern                  Controller#Action

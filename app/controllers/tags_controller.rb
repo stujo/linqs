@@ -1,4 +1,5 @@
 class TagsController < ApplicationController
+<<<<<<< HEAD
   before_action :find_tag, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -7,6 +8,13 @@ class TagsController < ApplicationController
       format.html
       format.json { render :json => {:tags => @tags.as_json}}
     end
+=======
+ before_action :find_tag, only: [:show, :edit, :update, :destroy]
+ validates :name , presence: true
+ 
+  def index
+    @tags = Tag.search(params[:search]).paginate(:per_page => 20, :page => params[:page])
+>>>>>>> 48290b8528a11f42af859fd758027a4bd5243175
   end
 
   def new
@@ -22,6 +30,7 @@ class TagsController < ApplicationController
       flash[:errors] = @tag.errors.full_messages
     end
   end
+  
 
   def show
     # @tag = Tag.find(params[:id])
@@ -43,6 +52,7 @@ class TagsController < ApplicationController
       render :edit
     end
   end
+  
 
 
   def destroy

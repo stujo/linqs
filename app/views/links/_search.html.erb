@@ -1,0 +1,9 @@
+ 
+
+<%= form_tag tags_path, :method => 'get', :id => "tags_search" do %>
+    <p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search", :name => nil %>
+    </p>
+    <div id="tags"><%= render 'tags' %></div>
+  <% end %>

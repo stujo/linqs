@@ -2,7 +2,7 @@ class LinksController < ApplicationController
 
   before_action :find_link , only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, :except => [:index, :show]
-
+  
 
   # will eventually display all public links via ajax get request
   def sort_by_title
@@ -11,11 +11,18 @@ class LinksController < ApplicationController
     link_pub = both.first
     link_priv = both.last
 
+<<<<<<< HEAD
     respond_to do |format|
       format.html
       format.json { render :json => {:links => link_pub.as_json}}
     end
   end
+=======
+def index
+  # makes a new instance of Link
+    @link = Link.new
+    links = Link.all.order(:upvotes).reverse_order
+>>>>>>> 48290b8528a11f42af859fd758027a4bd5243175
 
   def separate_public_and_private(links)
     #creates an empty array for public and private links
@@ -59,6 +66,7 @@ class LinksController < ApplicationController
       format.json { render :json => {:links => link_pub.as_json}}
     end
   end
+ 
 
   # should build new tags associated with the new link - is this working??
   def new
@@ -122,6 +130,7 @@ class LinksController < ApplicationController
     end
   end
 
+<<<<<<< HEAD
   def destroy
     @link.destroy
     redirect_to root_path
@@ -135,5 +144,34 @@ class LinksController < ApplicationController
 
   def links_params
     params.require(:link).permit(:title, :url, :link_tags_attributes => [:tag_attributes =>[:name]])
+=======
+   def up_vote
+    session[:return_to] ||= request.referer
+    @link = Link.find(params[:id])
+    #@link.votes.create
+    @link.upvotes = @link.upvotes + 1 
+     @link.save
+   redirect_to session.delete(:return_to)
+  end
+  def down_vote
+    session[:return_to] ||= request.referer
+    @link  = Link.find(params[:id])
+    @link.downvotes = @link.downvotes + 1
+    @link.save
+    redirect_to session.delete(:return_to)    
+  end
+    def destroy
+      @link.destroy
+      redirect_to root_path
+    end
+
+    private
+    def find_link
+      @link = Link.find(params[:id])
+    end
+    def links_params
+      params.require(:link).permit(:title, :url, :link_tags_attributes => [:tag_attributes =>[:name]])
+    end
+>>>>>>> 48290b8528a11f42af859fd758027a4bd5243175
   end
 end

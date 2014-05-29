@@ -1,16 +1,30 @@
+<<<<<<< HEAD
 <h2> Welcome To The Linqs App </h2>
 <%= link_to "Browse All Tags", tags_path %>
 <a id="displayText", href="javascript:toggle();">Add a link</a>
 <a id="findlink", href="javascript:toggle();">Search For Link</a>
 <!-- find link is currently hidden -->
 <br>
+=======
+ 
+<ul>
+    <a id="displayText", href="javascript:toggle();">Add a link</a>
+    <a id="findlink", href="javascript:toggle();">Search For Link</a>
+</ul>
+
+>>>>>>> 48290b8528a11f42af859fd758027a4bd5243175
 <form id="new_link">
     <input type="text" id="title" placeholder="Title" >
     <input type="text" id="url" placeholder="URL">
     <input type="text" id="name" placeholder="tag">
     <input type="submit"  >
 </form>
+<form id="find_link">
+    <input type="text" id="search_key" placeholder="Search ..">
+    <input type="submit">
+</form>
 
+<<<<<<< HEAD
 <form id="find_link">
     <input type="text" id="search_key" placeholder="Search ..">
     <input type="submit">
@@ -18,11 +32,15 @@
 <!-- find link form -->
 <br>
 <br>
+=======
+
+>>>>>>> 48290b8528a11f42af859fd758027a4bd5243175
  <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Public Links:</h3>
   </div>
   <div class="panel-body">
+<<<<<<< HEAD
 <ul id="publiclist">
     <% @links.each do |link| %>
     <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <b>Tagged: </b>
@@ -34,11 +52,30 @@
 </div>
 </div> 
 <!-- end of public links -->
+=======
+   <table class="table table-hover"
+    <ul id="publiclist">
+        <% @links.each do |link| %> 
+        <b><%= link.title %></b> 
+          <%= link_to "comment", link_comments_path(link)%>
+               - <%= link_to "edit", edit_link_path(link)%> - <%= link_to "delete", link_path(link),method: :delete %>   
+                Likes <%= link.upvotes %>
+                Dislikes <%= link.downvotes %>
+                <a href="<%=link.url%>"><%= @link.url %></a>
+                <%= link_to "Like", "/links/vote/upvote/#{link.id}", :class => 'btn btn-success' %>
+                <%= link_to "Dislike", "/links/vote/downvote/#{link.id}", :class => 'btn btn-success' %> <br><%= link_to link.url, link.url %> <br> <br>
+        <% end %>
+     </ul>
+    </table>
+  </div>
+</div>
+>>>>>>> 48290b8528a11f42af859fd758027a4bd5243175
 
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Private Links:</h3>
   </div>
+<<<<<<< HEAD
   <div class="panel-body">   
 <ul id="privatelist">
     <% @linksprivate.each do |link| %>
@@ -117,3 +154,18 @@
         });
     });
 </script>
+=======
+  <div class="panel-body">       
+    <ul id="privatelist">
+    <% @linksprivate.each do |link| %>
+      <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>
+    <% end %>
+
+
+    </ul>
+ </div>
+</div>
+
+
+
+>>>>>>> 48290b8528a11f42af859fd758027a4bd5243175
