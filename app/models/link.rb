@@ -8,4 +8,8 @@ class Link < ActiveRecord::Base
   validates :title, presence: true, length: {minimum: 2}
   validates :url, presence: true, length: {minimum: 9}
 
+  def self.search_for(query)
+    where('url LIKE :query OR title LIKE :query', query: "%#{query}%")
+  end
+
 end

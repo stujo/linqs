@@ -2,6 +2,21 @@ class LinksController < ApplicationController
 
   before_action :find_link , only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, :except => [:index, :show]
+
+  def index
+    # makes a new instance of Link
+    @link = Link.new
+    links = Link.search_for(params[:q]).order(:upvotes).reverse_order
+
+    both = separate_public_and_private(links)
+    link_pub = both.first
+    link_priv = both.last
+
+    respond_to do |format|
+      format.html
+      format.json { render :json => {:links => link_pub.as_json}}
+    end
+  end
   
 
   # will eventually display all public links via ajax get request
@@ -45,20 +60,6 @@ class LinksController < ApplicationController
     return [@links, @linksprivate]
   end
 
-  def index
-    # makes a new instance of Link
-    @link = Link.new
-    links = Link.all.order(:upvotes).reverse_order
-
-    both = separate_public_and_private(links)
-    link_pub = both.first
-    link_priv = both.last
-
-    respond_to do |format|
-      format.html
-      format.json { render :json => {:links => link_pub.as_json}}
-    end
-  end
  
 
   # should build new tags associated with the new link - is this working??
