@@ -60,11 +60,6 @@
  </div>
 </div>
 
-
-
-
-
-
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -116,7 +111,7 @@
                         if (data.tags[0].name === "private") {
                             privatelist.prepend(newLink)
                         } else {
-                            publiclist.prepend(newLink)
+                            $('.panel-body').prepend(newLink)
                         };
                     },
                     //return false;

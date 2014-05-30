@@ -126,7 +126,6 @@ class LinksController < ApplicationController
    def up_vote
     session[:return_to] ||= request.referer
     @link = Link.find(params[:id])
-    #@link.votes.create
     @link.upvotes = @link.upvotes + 1 
      @link.save
    redirect_to session.delete(:return_to)
