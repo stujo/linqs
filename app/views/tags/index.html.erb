@@ -1,9 +1,13 @@
-<h1> Tags Index Page </h1>
+<h1 id="tagindex"> Tags Index Page </h1>
+<br>
+<table id="tagtable" class="table table-hover">
+  
+<p><%= link_to "Add a tag", new_tag_path, :class => "btn btn-s btn-default" %></p>
 <br>
 
-<p><%= link_to "Add a tag", new_tag_path, :class => "btn btn-s btn-primary" %></p>
-<br>
-
-<% @tags.each do |tag| %>
-	<%= link_to tag.name, tag_path(tag.id) %><br>
+<% @tags.each do |tag| %><tr>
+<div cols="50%,50%">
+	<td><%= link_to tag.name, tag_path(tag.id) %></td>
+</div>
 <% end %>
+</tr>
