@@ -1,11 +1,10 @@
-<h1>TAGS NEW PAGE</h1>
-<h2>WE WILL REMOVE This to allow for AJAX CALLS ON MAIN PAGE</h2>
+<h1>Create a Tag</h1>
+<p><em>This tag will not automatically be associated with a link. To create a link, <%= link_to "click here.", links_path %></em></p>
 
 <%= form_for @tag do |f| %>
-	<%= f.text_field :name, placeholder: "Name This Tag" %><br>
-	
-	<%= f.submit "Create" %>
+	<p><%= f.text_field :name, placeholder: "Name Your Tag" %>
+	<%= f.submit "Create", :class => "btn btn-s btn-success" %></p>
 <% end %>
 <br>
 
-<%= link_to "Cancel", tags_path %>
+<%= link_to "Cancel", tags_path, :class => "btn btn-s btn-danger" %>

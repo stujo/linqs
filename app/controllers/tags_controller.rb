@@ -1,19 +1,22 @@
 class TagsController < ApplicationController
- before_action :find_tag, only: [:show, :edit, :update, :destroy]
- validates :name , presence: true
- 
+  before_action :find_tag, only: [:show, :edit, :update, :destroy]
+
   def index
-    @tags = Tag.all
-  end
+    @tags = Tag.all.order(:name)
+    #@tags = Tag.search(params[:search]).paginate(:per_page => 20, :page => params[:page])
+
+    respond_to do |format|
+      format.html
+      format.json { render :json => {:tags => @tags.as_json}}
+    end
 
   def new
     @tag = Tag.new
     @tag.link_tags.build
   end
-  
+
   def create
     @tag = Tag.new(tags_params)
-    
     if @tag.save
       redirect_to tag_path(@tag)
     else
@@ -23,16 +26,18 @@ class TagsController < ApplicationController
   
 
   def show
-   # @tag = Tag.find(params[:id])
-    @name = @tag.name
+    # @tag = Tag.find(params[:id])
   end
 
   def edit
-   # @tag = Tag.find(params[:id])
+    # find all link_ids assoc'd with tag_id in link_tags
+    @links = []
+    @tag.link_tags.find_by(tag_id: @tag.id).each do |link|
+      @links.push(link)
+    end
   end
 
   def update
-    #@tag = Tag.find(params[:id])
     if @tag.update(tags_params)
       redirect_to tag_path(@tag)
     else
@@ -40,21 +45,19 @@ class TagsController < ApplicationController
       render :edit
     end
   end
-  def search
-      @tags = Tag.search (params[:search])
-    end
 
-    def destroy
-      #@tag = Tag.find(params[:id])
-      @tag.destroy
-      redirect_to root_path
-    end
+  def destroy
+    #@tag = Tag.find(params[:id])
+    @tag.destroy
+    redirect_to root_path
+  end
 
-    private
-    def find_tag
-      @tag = Tag.find(params[:id])
-    end
-    def tags_params
-      params.require(:tag).permit(:name)
-    end
+  private
+  def find_tag
+    @tag = Tag.find(params[:id])
+  end
+
+  def tags_params
+    params.require(:tag).permit(:name)
+  end
 end

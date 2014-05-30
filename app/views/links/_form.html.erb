@@ -3,9 +3,8 @@
 <%= form_for @link do |f| %>
   <%= f.text_field :title, placeholder: "Name This Link" %><br>
   <%= f.text_area :url, placeholder: "Paste URL here" %><br>
-  <br>
+<br>
   <b>
-
     <%=f.fields_for :link_tags do |link_tags_form| %>
       Tags:
       <br>
@@ -18,8 +17,6 @@
     <% end %>
   <%= f.submit class: "btn btn-primary" %>
 <% end %>
-
-
+<% end %>
 <!-- NEED TO ADD VIEWS THAT ARE EMBEDDED -->
-
 <%= link_to "Cancel", links_path %>

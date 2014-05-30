@@ -1,8 +1,9 @@
 <h1> Tags Index Page </h1>
 <br>
 
-<%= link_to "Add a tag", new_tag_path %><br>
+<p><%= link_to "Add a tag", new_tag_path, :class => "btn btn-s btn-primary" %></p>
+<br>
 
 <% @tags.each do |tag| %>
-	<%= link_to "edit", edit_tag_path(tag)%> <%= link_to "delete", tag_path(tag), method: :delete %>  <b><%= tag.name %></b>  <br>
+	<%= link_to tag.name, tag_path(tag.id) %><br>
 <% end %>

@@ -1,10 +1,10 @@
 
-
- <h2> Welcome To The Linqs App </h2>
-
+<h2> Welcome To The Linqs App </h2>
+<%= link_to "Browse All Tags", tags_path %>
 <a id="displayText", href="javascript:toggle();">Add a link</a>
 <a id="findlink", href="javascript:toggle();">Search For Link</a>
-
+<!-- find link is currently hidden -->
+<br>
 
 <form id="new_link">
     <input type="text" id="title" placeholder="Title" >
@@ -17,76 +17,74 @@
     <input type="submit">
 </form>
 
-       
-<div class="panel panel-default">
+<br>
+<br>
+ <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Public Links:</h3>
   </div>
   <div class="panel-body">
+   <table class="table table-hover"
     <ul id="publiclist">
-        <% @links.each do |link| %>
-            <ul class= " links_list">
-              <li>
-               <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link),method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br> 
-               </li>
-            </ul> 
+        <% @links.each do |link| %> 
+        <b><%= link.title %></b> 
+          <%= link_to "comment", link_comments_path(link)%>
+               - <%= link_to "edit", edit_link_path(link)%> - <%= link_to "delete", link_path(link),method: :delete %>   
+                Likes <%= link.upvotes %>
+                Dislikes <%= link.downvotes %>
+                <a href="<%=link.url%>"><%= @link.url %></a>
+                <%= link_to "Like", "/links/vote/upvote/#{link.id}", :class => 'btn btn-success' %>
+                <%= link_to "Dislike", "/links/vote/downvote/#{link.id}", :class => 'btn btn-success' %> <br><%= link_to link.url, link.url %> <br> <br>
+                Tagged: <% link.tags.each do |tag| %>
+                <%= link_to tag.name, tag_path(tag) %>
+                <% end %><br>
         <% end %>
-    </ul>
+     </ul>
+    </table>
   </div>
 </div>
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Private Links:</h3>
   </div>
-  <div class="panel-body">       
-    <ul id="privatelist">
+  <div class="panel-body">   
+<ul id="privatelist">
     <% @linksprivate.each do |link| %>
-      <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> <br>
+    <%= link_to "edit", edit_link_path(link)%> <%= link_to "delete", link_path(link), method: :delete %>  <b><%= link.title %></b> - <%= link_to link.url, link.url %> Tagged:
+    <% link.tags.each do |tag| %>
+    <%= link_to tag.name, tag_path(tag) %>
+    <% end %><br>
     <% end %>
-    </ul>
+</ul>
  </div>
 </div>
-<br>
+
+
+
+
+
 
 <script type="text/javascript">
+    $(document).ready(function () {
 
-    $(document).ready(function() {
-        $("#displayText").on("click",function toggle(){
-              var ele = document.getElementById("new_link");
-                var text = document.getElementById("displayText");
-                if(ele.style.display == "block"){
-                    ele.style.display = "none";
-                    text.innerHTML = "Add A Link";
-                }
-                else {
-                    ele.style.display = "block";
-                    text.innerHTML = "Hide Form";
-                }
-
+        $("#displayText").on("click", function toggle() {
+            var ele = document.getElementById("new_link");
+            var text = document.getElementById("displayText");
+            if (ele.style.display == "block") {
+                ele.style.display = "none";
+                text.innerHTML = "Add A Link";
+            } else {
+                ele.style.display = "block";
+                text.innerHTML = "Hide Form";
+            }
         });
-
-        $("#findlink").on("click",function toggle(){
-              var ele = document.getElementById("find_link");
-                var text = document.getElementById("findlink");
-                if(ele.style.display == "block"){
-                    ele.style.display = "none";
-                    text.innerHTML = "Search A Link";
-                }
-                else {
-                    ele.style.display = "block";
-                    text.innerHTML = "Hide Form";
-                }
-
-        });
-               
-       
-        $('#new_link').on('submit', function(e) {
-             e.preventDefault();
+        $('#new_link').on('submit', function (e) {
+            e.preventDefault();
             var title = $('#title').val();
             var url = $('#url').val();
             var tag = $('#name').val();
 
-       
             if (!title.length) {
                 return;
             } else { // send user input to json
@@ -99,40 +97,32 @@
                             "url": url,
                             "link_tags_attributes": {
                                 "0": {
-                                  "tag_attributes": {
-                                    "name": tag
+                                    "tag_attributes": {
+                                        "name": tag
                                     }
                                 }
                             }
                         }
                     },
                     dataType: "json",
-                    success: function(data) {
+                    success: function (data) {
                         console.log(data);
-                         var publiclist = $('#publiclist')
-                         var privatelist = $('#privatelist')
-                         console.log(data.title);
-                         console.log(data.url);
-
-
-    var newLink =  $('<a href="/links/' +data.id + '/edit">edit</a> <a data-method="delete" href="/links/' + data.id + '" rel="nofollow">delete</a> <b>' + data.title + '</b> - <a href="' + data.url + '">' + data.url + '</a> <br>')
-                         // var newLink = $('<li><span class="edit">edit</span>' + " " + '<span class="delete">delete </span><b>' + data.title + ' - </b> ' + data.url + ' <b>Tags:</b> ' + data.tags[0].name + '</li>');
-                         // var LinkwithButtons = $('<span class="delete">delete</span><span class="edit">edit</span>' + newLink);
-                         console.log(newLink);
-                         // newLink.prepend('<span class="delete">delete</span><span class="edit">edit</span>' +);
-                         // newLink.hide().appendTo('publiclist').fadeIn(500);
+                        var publiclist = $('#publiclist')
+                        var privatelist = $('#privatelist')
+                        console.log(data.title);
+                        console.log(data.url);
+                        var newLink = $('<a href="/links/' + data.id + '/edit">edit</a> <a data-method="delete" href="/links/' + data.id + '" rel="nofollow">delete</a> <b>' + data.title + '</b> - <a href="' + data.url + '">' + data.url + '</a> <br>')
+                        console.log(newLink);
                         if (data.tags[0].name === "private") {
-                            privatelist.prepend(newLink) 
-                        }
-                        else {
-                            publiclist.prepend(newLink) 
+                            privatelist.prepend(newLink)
+                        } else {
+                            publiclist.prepend(newLink)
                         };
-
                     },
                     //return false;
-                    error: function(data) {
+                    error: function (data) {
                         console.log(data.responseText);
-                        alert("Yo its broke");
+                        alert("Please input an appropriate Title, URL, and Tag");
                     }
                 });
                 $('#link_title').val("");
@@ -140,7 +130,5 @@
                 $('#link_tags_name').val("");
             }
         });
-    };
-
+    });
 </script>
-

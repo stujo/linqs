@@ -1,0 +1,7 @@
+<h1>Comment On <%= @link.title %></h1>
+
+  <%= form_for([@link, @comment]) do |f| %>
+  <%= f.text_field :content, placeholder: "Comment" %>
+  <% f.hidden_field :user_id %>
+  <%= f.submit %>
+<% end %>

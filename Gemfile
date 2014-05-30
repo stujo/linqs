@@ -4,8 +4,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 
-gem 'pry-rails'
-# Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -32,11 +30,13 @@ gem 'devise'
 #user authentication
 gem 'will_paginate', '~> 3.0'
 
+group :production do
+  gem 'rails_12factor'
+end
 
 group :development, :test do
 	gem 'rspec-rails'
 	gem 'factory_girl_rails'	
-	gem 'pry'
 end
 
 # Use ActiveModel has_secure_password
