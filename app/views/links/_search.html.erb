@@ -1,13 +1,7 @@
-<div id="search">
 <%= form_tag "/", method: "GET" do %>
   <%= hidden_field_tag :direction, params[:direction] %>
   <%= hidden_field_tag :sort, params[:sort] %>
   <%= text_field_tag :q, params[:q] %>
   <%= submit_tag "Search" %>
 <% end %>
-</div>
-<div id="sort">Sort by: 
-      <%= sortable "title", "Title"%>
-      <%= sortable "updated_at", "Recent"%>
-      <%= sortable "upvotes", "Popularity"%>
-</div>
+
