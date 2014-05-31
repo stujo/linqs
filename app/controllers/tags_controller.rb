@@ -2,7 +2,7 @@ class TagsController < ApplicationController
   before_action :find_tag, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tags = Tag.all.order(:name)
+    @tags = Tag.all.order(:name).paginate(:per_page => 10, :page => params[:page])
     #@tags = Tag.search(params[:search]).paginate(:per_page => 20, :page => params[:page])
 
     respond_to do |format|
