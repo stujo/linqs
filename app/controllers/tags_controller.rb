@@ -9,6 +9,7 @@ class TagsController < ApplicationController
       format.html
       format.json { render :json => {:tags => @tags.as_json}}
     end
+  end
 
   def new
     @tag = Tag.new

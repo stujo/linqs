@@ -1,22 +1,24 @@
-<h2>Edit Your Link:</h2>
 
+
+<h2>Edit Your Link:</h2>
+<div id="edit-link" >
 <%= form_for @link do |f| %>
+
   <%= f.text_field :title, placeholder: "Name This Link" %><br>
   <%= f.text_area :url, placeholder: "Paste URL here" %><br>
 <br>
   <b>
     <%=f.fields_for :link_tags do |link_tags_form| %>
-      Tags:
-      <br>
-
+  
         <%=link_tags_form.fields_for :tag do |tags_form| %>
             <%= tags_form.label :name %>
             <%= tags_form.text_field :name %>
             <% end %>
         <br>
     <% end %>
-  <%= f.submit class: "btn btn-primary" %>
-<% end %>
-<% end %>
+  <%= f.submit class: "btn btn-primary btn-sm" %>
+  <% end %>
+
 <!-- NEED TO ADD VIEWS THAT ARE EMBEDDED -->
 <%= link_to "Cancel", links_path %>
+</div>

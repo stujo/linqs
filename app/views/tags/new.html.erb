@@ -1,10 +1,13 @@
-<h1>Create a Tag</h1>
-<p><em>This tag will not automatically be associated with a link. To create a link, <%= link_to "click here.", links_path %></em></p>
+<div id="create-tag">
+	<h1>Create a Tag</h1>
+	<p><em>This tag will not automatically be associated with a link. To create a link, <%= link_to "click here.", links_path %></em></p>
 
-<%= form_for @tag do |f| %>
-	<p><%= f.text_field :name, placeholder: "Name Your Tag" %>
-	<%= f.submit "Create", :class => "btn btn-s btn-success" %></p>
-<% end %>
-<br>
+	<%= form_for @tag do |f| %>
+		<p><%= f.text_field :name, placeholder: "Name Your Tag" %></br>
 
-<%= link_to "Cancel", tags_path, :class => "btn btn-s btn-danger" %>
+		<%= f.submit "Create", :class => "btn btn-s btn-default" %></p>
+
+	<%= link_to "Cancel", tags_path, :class => "btn btn-s btn-danger" %>
+	<% end %>
+	
+</div>

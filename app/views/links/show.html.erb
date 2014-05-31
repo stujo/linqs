@@ -1,3 +1,4 @@
+<table class="table-hover">
 <h1>LINKS SHOW PAGE</h1>
 	<%= @title %><br>
 	<%= link_to @url, @url %><br>
@@ -8,4 +9,4 @@
 	<% @link.tags.each do |tag| %>
 	<%=tag.name %>
 <% end %>
-
+</table>
