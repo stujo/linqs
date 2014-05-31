@@ -2,19 +2,8 @@
 <div id="greeting"> Welcome To The Linqs App </div>
 <br> -->
 
-<div id="search">
-<%= form_tag "/", method: "GET" do %>
-  <%= hidden_field_tag :direction, params[:direction] %>
-  <%= hidden_field_tag :sort, params[:sort] %>
-  <%= text_field_tag :q, params[:q] %>
-  <%= submit_tag "Search" %>
-<% end %>
-</div>
-<div id="sort">Sort by: 
-      <%= sortable "title", "Title"%>
-      <%= sortable "updated_at", "Recent"%>
-      <%= sortable "upvotes", "Popularity"%>
-</div>
+<div id= <%= render 'search' %>
+
 <div id="all-tags"><%= link_to "Browse All Tags", tags_path %> </div>
 <div id="displayText"><a href="javascript:toggle();">Add a link</a></div>
 
