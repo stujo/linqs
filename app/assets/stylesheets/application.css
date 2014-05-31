@@ -21,15 +21,15 @@
     text-shadow: 5px 5px 5px #aaa;
  }
 
- #sort {
- 	margin-left: 7px;
- 	font-size: 12px;
+.pretty th .current {
+	text-decoration:underline;
+	COLOR: Black;
 }
 
-#sort .asc {
+.pretty th.asc {
 }
 
-#sort .desc {
+.pretty th .desc {
 }
 
  #all-tags {
