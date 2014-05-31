@@ -15,12 +15,12 @@
 //= require turbolinks
 //= require_tree .
 
-$(function() {
-    $("#sort a").live("click", function() {
-        $.getScript(this.href);
-        return false;
-    });
-});
+// $(function() {
+//     $("#sort").live("click", function() {
+//         $.getScript(this.href);
+//         return false;
+//     });
+// });
 
 // $(function() {
 //   $("#tags th a, #tags .pagination a").live("click", function() {
