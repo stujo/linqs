@@ -10,6 +10,7 @@ class TagsController < ApplicationController
       format.json { render :json => {:tags => @tags.as_json}}
     end
   end
+
   def new
     @tag = Tag.new
     @tag.link_tags.build
