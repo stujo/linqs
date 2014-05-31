@@ -8,10 +8,12 @@ class LinksController < ApplicationController
     @link = Link.new
     links = Link.search_for(params[:q]).order(:upvotes).reverse_order
 
+    #allows for public and private links
     both = separate_public_and_private(links)
     link_pub = both.first
     link_priv = both.last
 
+    #allows for communication with the bot
     respond_to do |format|
       format.html
       format.json { render :json => {:links => link_pub.as_json}}
@@ -138,16 +140,16 @@ class LinksController < ApplicationController
     @link.save
     redirect_to session.delete(:return_to)    
   end
-    def destroy
-      @link.destroy
-      redirect_to root_path
-    end
+  def destroy
+    @link.destroy
+    redirect_to root_path
+  end
 
-    private
-    def find_link
-      @link = Link.find(params[:id])
-    end
-    def links_params
-      params.require(:link).permit(:title, :url, :link_tags_attributes => [:tag_attributes =>[:name]])
-    end
+  private
+  def find_link
+    @link = Link.find(params[:id])
+  end
+  def links_params
+    params.require(:link).permit(:title, :url, :link_tags_attributes => [:tag_attributes =>[:name]])
+  end
 end

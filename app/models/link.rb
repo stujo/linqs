@@ -11,6 +11,7 @@ class Link < ActiveRecord::Base
 
   def self.search_for(query)
     where('url LIKE :query OR title LIKE :query', query: "%#{query}%")
+    #how do we return what is in the tags as well
   end
 
   #Pagination
