@@ -48,7 +48,13 @@ table#table1 {
 
 }
 
-
+#addlinkjs {
+	margin-left: 10px;
+	margin-right: 10px;
+	border-radius: 10px 10px;
+	background-color: #EEE8D5;
+	background-image:url('http://doeshelp.com/tcmi/wp-content/uploads/2013/02/abstract-blue-backgrounds-37_1920x1080_71474.jpg');
+}
 
  #all-tags {
  	margin-left: 7px;
@@ -83,6 +89,8 @@ table#table1 {
  	display: block;
  	margin-left: 20px;
  }
+
+
 
   body { 
   padding-top: 70px;  

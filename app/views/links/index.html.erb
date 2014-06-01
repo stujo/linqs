@@ -30,8 +30,6 @@
        <td> 
            <b><%= link_to link.title, link.url %> </b> 
            <div id="menu">
-          
-
           </div>  
                 <a href="<%=link.url%>"><%= @link.url %></a>
                 Tags: <% link.tags.each do |tag| %>
@@ -74,17 +72,28 @@
     <ul id="privatelist">
         <% @link_priv.each do |link| %> <tr>
        <td> 
-           <b><%= link.title %></b> 
-           <div class="pull-right">
-          <%= link_to "comment", link_comments_path(link)%>
-               - <%= link_to "edit", edit_link_path(link)%> - <%= link_to "delete", link_path(link),method: :delete %>
+           <b><%= link_to link.title, link.url %> </b> 
+           <div id="menu">
           </div>  
                 <a href="<%=link.url%>"><%= @link.url %></a>
-                 <br><%= link_to link.url, link.url %> <br> <br>
                 Tags: <% link.tags.each do |tag| %>
                 <%= link_to tag.name, tag_path(tag) %>
                 <% end %>
-                 <div class="pull-right">
+                <div id="comments">
+               <%= link_to "Comment", new_link_comment_path(link)%> -                
+               <%= link_to "Edit", edit_link_path(link)%> - 
+               <%= link_to "Delete", link_path(link),method: :delete %>
+                <% link.comments.each do |comment| %>
+                  <li>
+                    <%= comment.content %> 
+                    <% if comment.user %>
+                    </li>
+                    <% else %>
+                      <% %>
+                    <% end %>
+                <% end %>
+              </div>
+                 <div id="likes">
                        Likes 
                         <%= link_to link.upvotes, "/links/vote/upvote/#{link.id}", :class => 'btn btn-default' %>
                         Dislikes 
@@ -138,13 +147,23 @@
                         }
                     },
                     dataType: "json",
+
                     success: function (data) {
                         console.log(data);
                         var publiclist = $('#publiclist')
                         var privatelist = $('#privatelist')
                         console.log(data.title);
                         console.log(data.url);
-                        var newLink = $('<a href="/links/' + data.id + '/edit">edit</a> <a data-method="delete" href="/links/' + data.id + '" rel="nofollow">delete</a> <b>' + data.title + '</b> - <a href="' + data.url + '">' + data.url + '</a> <br>')
+                       
+                        $.each(data.tags, function( index, value ) {
+                            value.name 
+                        });
+                        var newLink = $(' <div id="addlinkjs"><b><a href="' + data.url + '">' + data.title + '</a> </b> <br> Tags: <br><a href="/links/' + data.id + '/comments/new">Comment  </a> - <a href="/links/' + data.id + '/edit">Edit </a> - <a href="/links/' + data.id + '/delete">Delete </a> <br> Likes <a href="/links/vote/upvote/' + data.id + '"><button class="btn btn-small" background-color: white>' + data.upvotes + '<i class="icon-thumbs-up"></i></button></a>Disikes <a href="/links/vote/downvote/' + data.id + '"><button class="btn btn-small">' + data.downvotes + '<i class="icon-thumbs-up"></i> <br></div>')
+                          //TO DO: why wont the code work and can we make it so the tags print out in an array
+
+                        // var tags =       $.each(data.tags, function( index, value ) {
+                        //     value.name 
+                        // });
                         console.log(newLink);
                         if (data.tags[0].name === "private") {
                             privatelist.prepend(newLink)
