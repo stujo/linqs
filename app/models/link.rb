@@ -8,6 +8,9 @@ class Link < ActiveRecord::Base
   validates :title, presence: true, length: {minimum: 2}
   validates :url, presence: true, length: {minimum: 9}
 
+  def self.keywords
+    return doc = Pismo::Document.new(self)
+  end
 
   def self.search_for(query)
     where('url LIKE :query OR title LIKE :query', query: "%#{query}%")
@@ -16,7 +19,6 @@ class Link < ActiveRecord::Base
 
   #Pagination
   #self.per_page = 20
-
 
 end
 

@@ -1,4 +1,5 @@
 class LinksController < ApplicationController
+  require 'open-uri'
   helper_method :sort_column, :sort_direction
   before_action :find_link , only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, :except => [:index, :show]
@@ -82,7 +83,7 @@ class LinksController < ApplicationController
       @link.url.insert(0, "http://")
       @link.save
     end
-
+    #@keyword = self.keywords
     #capture string of tags
     @inputtedtags = (links_params[:link_tags_attributes]["0"][:tag_attributes][:name]).gsub(/,/, '').downcase.split(" ").flatten
     binding.pry
