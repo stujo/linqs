@@ -1,12 +1,27 @@
-<table class="table-hover">
-<h1>LINKS SHOW PAGE</h1>
-	<%= @title %><br>
-	<%= link_to @url, @url %><br>
-	<!-- This breaks when user inputs a url without http://www....need validations/templates  -->
-	<%= link_to "edit", edit_link_path(@link)%> <%= link_to "delete", link_path(@link), method: :delete %>
-	<%= link_to "Back", links_path(@link)%>
-	<h3>Tags:</h3>
-	<% @link.tags.each do |tag| %>
-	<%=tag.name %>
-<% end %>
-</table>
+
+<h3><%= link_to @link.title, @link.url %> </h3> 
+
+  Tags: <% @link.tags.each do |tag| %>
+  <%= link_to tag.name, tag_path(tag) %>
+  <% end %>
+  <div id="comments">
+ <%= link_to "Comment", new_link_comment_path(@link)%> -                
+ <%= link_to "Edit", edit_link_path(@link)%> - 
+ <%= link_to "Delete", link_path(@link),method: :delete %>
+  <% @link.comments.each do |comment| %>
+    <li>
+      <%= comment.content %> 
+      <% if comment.user %>
+      </li>
+      <% else %>
+        <% %>
+      <% end %>
+  <% end %>
+</div>
+   <div id="likes">
+         Likes 
+          <%= link_to @link.upvotes, "/links/vote/upvote/#{@link.id}", :class => 'btn btn-default' %>
+          Dislikes 
+          <%= link_to @link.downvotes, "/links/vote/downvote/#{@link.id}", :class => 'btn btn-default' %>
+   </div>
+

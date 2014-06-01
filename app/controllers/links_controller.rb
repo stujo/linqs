@@ -115,16 +115,12 @@ class LinksController < ApplicationController
 
   # shows details of a single link, including all tags assoc'd with it
   def show
-    @title = @link.title
-    @url = @link.url
   end
 
   # loads link and assoc'd tags to edit
   def edit
     @link = Link.find(params[:id])
     if current_user && current_user.id == @link.user_id
-      @link_tag = @link.link_tags.build
-      @link_tag.build_tag
     else
       flash[:notice] = "Not Authorized!"
       redirect_to root_path
@@ -174,7 +170,7 @@ class LinksController < ApplicationController
     params.require(:link).permit(:title, :url, :link_tags_attributes => [:tag_attributes =>[:name]])
   end
   def sort_column
-    Link.column_names.include?(params[:sort]) ? params[:sort] : "upvotes"
+    Link.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
   end
 
   def sort_direction
