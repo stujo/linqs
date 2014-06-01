@@ -85,8 +85,8 @@ class LinksController < ApplicationController
     end
     #@keyword = self.keywords
     #capture string of tags
-    @inputtedtags = (links_params[:link_tags_attributes]["0"][:tag_attributes][:name]).gsub(/,/, '').downcase.split(" ").flatten
-    binding.pry
+
+    @inputtedtags = (links_params[:link_tags_attributes]["0"][:tag_attributes][:name]).gsub(/,/,'').downcase.split(" ").flatten
     
     # Decide if tag is already in the database
     @inputtedtags.each do |tag|
