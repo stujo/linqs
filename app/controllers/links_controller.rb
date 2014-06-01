@@ -7,12 +7,13 @@ class LinksController < ApplicationController
   def index
     # makes a new instance of Link
     @link = Link.new
-    links = Link.search_for(params[:q]).order(sort_column + " " + sort_direction).reverse_order
+    links = Link.search_for(params[:q]).order(sort_column + " " + sort_direction)
 
     #allows for public and private links
     both = separate_public_and_private(links)
     @link_pub = both.first
     @link_priv = both.last
+
 
     #allows for communication with the bot
     respond_to do |format|

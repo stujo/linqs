@@ -32,17 +32,28 @@
     <ul id="publiclist">
         <% @link_pub.each do |link| %> <tr>
        <td> 
-           <b><%= link.title %></b> 
-           <div class="pull-right">
-          <%= link_to "comment", link_comments_path(link)%>
+           <b><%= link_to link.title, link.url %> </b> 
+           <div id="menu">
+          <%= link_to "comment", new_link_comment_path(link)%>
                - <%= link_to "edit", edit_link_path(link)%> - <%= link_to "delete", link_path(link),method: :delete %>
           </div>  
                 <a href="<%=link.url%>"><%= @link.url %></a>
-                 <br><%= link_to link.url, link.url %> <br> <br>
                 Tags: <% link.tags.each do |tag| %>
                 <%= link_to tag.name, tag_path(tag) %>
                 <% end %>
-                 <div class="pull-right">
+                <div id="comments">
+                <% link.comments.each do |comment| %>
+                Comments: 
+                  <li><%= comment.user.email %>:
+                    <%= comment.content %> 
+                    <% if comment.user %>
+                    </li><br>
+                    <% else %>
+                      <% %>
+                    <% end %>
+                <% end %>
+              </div>
+                 <div id="likes">
                        Likes 
                         <%= link_to link.upvotes, "/links/vote/upvote/#{link.id}", :class => 'btn btn-default' %>
                         Dislikes 

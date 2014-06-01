@@ -2,7 +2,7 @@ class TagsController < ApplicationController
   before_action :find_tag, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tags = Tag.search(params[:search]).order(:name).paginate(:per_page => 10, :page => params[:page])
+    @tags = Tag.search(params[:search]).order(:name)
     respond_to do |format|
       format.html
       format.json { render :json => {:tags => @tags.as_json}}

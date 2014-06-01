@@ -21,6 +21,11 @@
     text-shadow: 5px 5px 5px #aaa;
  }
 
+#id {
+	margin-left: 7px;
+	font-size: 12px;	
+}
+
 .pretty th .current {
 	text-decoration:underline;
 	COLOR: Black;
@@ -31,6 +36,8 @@
 
 .pretty th .desc {
 }
+
+
 
  #all-tags {
  	margin-left: 7px;
