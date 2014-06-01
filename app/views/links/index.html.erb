@@ -34,20 +34,22 @@
        <td> 
            <b><%= link_to link.title, link.url %> </b> 
            <div id="menu">
-          <%= link_to "comment", new_link_comment_path(link)%>
-               - <%= link_to "edit", edit_link_path(link)%> - <%= link_to "delete", link_path(link),method: :delete %>
+          
+
           </div>  
                 <a href="<%=link.url%>"><%= @link.url %></a>
                 Tags: <% link.tags.each do |tag| %>
                 <%= link_to tag.name, tag_path(tag) %>
                 <% end %>
                 <div id="comments">
+               <%= link_to "Comment", new_link_comment_path(link)%> -                
+               <%= link_to "Edit", edit_link_path(link)%> - 
+               <%= link_to "Delete", link_path(link),method: :delete %>
                 <% link.comments.each do |comment| %>
-                Comments: 
-                  <li><%= comment.user.email %>:
+                  <li>
                     <%= comment.content %> 
                     <% if comment.user %>
-                    </li><br>
+                    </li>
                     <% else %>
                       <% %>
                     <% end %>
