@@ -1,8 +1,9 @@
+taylor = User.create!(:email => "taylor@gmail.com", :password => "12345678")
 
-railslink1 = Link.create!(:title => "Rails Guide", :url => "http://www.railsguide.com")
+railslink1 = taylor.links.create!(:title => "Rails Guide", :url => "http://www.railsguide.com")
 
-railslink2 = Link.create!(:title => "Stack Overflow", :url => "http://www.stackoverflow.com")
-railslink3 = Link.create!(:title => "PostGres", :url => "http://www.postgres.com")
+railslink2 = taylor.links.create!(:title => "Stack Overflow", :url => "http://www.stackoverflow.com")
+railslink3 = taylor.links.create!(:title => "PostGres", :url => "http://www.postgres.com")
 railslink4 = Link.create!(:title => "Steps for Installfest", :url => "https://gist.github.com/rsofaer/7952112")
 railslink5 = Link.create!(:title => "Living in the Terminal", :url => "https://github.com/wdi-sf-march-2014/notes/blob/master/living_in_the_command_line.md")
 railslink6 = Link.create!(:title => "Git Lesson", :url => "https://gist.github.com/jackieiscool/c871c86dc46ab0fadd37")
@@ -48,7 +49,7 @@ railslink45 = Link.create!(:title => "Mini-Project-HappiTails", :url => "https:/
 railslink46 = Link.create!(:title => "Warm up Binary Search", :url => "https://github.com/wdi-sf-march-2014/notes/tree/master/WarmUps/Methods/BinarySearch")
 
 
-railslink1.tags.create!(:name => "Rails Guide")
+railslink1.tags.create!(:name => "private")
 railslink2.tags.create!(:name => "stackoverflow")
 railslink3.tags.create!(:name => "PostGres")
 railslink4.tags.create!(:name => "Steps for Installfest")
@@ -94,13 +95,13 @@ railslink44.tags.create!(:name => "HTML CSS")
 railslink45.tags.create!(:name => "Mini-Project-HappiTails")
 railslink46.tags.create!(:name => "Warm up Binary Search")
 railslink2.tags.create!(:name => "private")
-railslink3.tags.create!(:name => "Tic Tac Toe lab")
-railslink4.tags.create!(:name => "Rspec Lesson note")
-railslink5.tags.create!(:name => "Rspec lesson lab")
-railslink6.tags.create!(:name => "Intro to Algorithms")
-railslink7.tags.create!(:name => "Algorithms lab")
+railslink3.tags.create!(:name => "private")
+railslink4.tags.create!(:name => "private")
+railslink5.tags.create!(:name => "private")
+railslink6.tags.create!(:name => "private")
+railslink7.tags.create!(:name => "private")
 railslink8.tags.create!(:name => "private")
-railslink9.tags.create!(:name => "Blocks & Iterators")
+railslink9.tags.create!(:name => "private")
 
 
 commenta = railslink1.comments.create!(:content => "Shaq is awesome")

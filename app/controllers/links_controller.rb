@@ -1,4 +1,5 @@
 class LinksController < ApplicationController
+  require 'open-uri'
   helper_method :sort_column, :sort_direction
   before_action :find_link , only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, :except => [:index, :show]
@@ -10,16 +11,16 @@ class LinksController < ApplicationController
 
     #allows for public and private links
     both = separate_public_and_private(links)
-    link_pub = both.first
-    link_priv = both.last
+    @link_pub = both.first
+    @link_priv = both.last
 
     #allows for communication with the bot
     respond_to do |format|
       format.html
-      format.json { render :json => {:links => link_pub.as_json}}
+      format.json { render :json => {:links => @link_pub.as_json}}
     end
   end
-  
+
 
   # will eventually display all public links via ajax get request
   def sort_by_title
@@ -62,7 +63,7 @@ class LinksController < ApplicationController
     return [@links, @linksprivate]
   end
 
- 
+
 
   # should build new tags associated with the new link - is this working??
   def new
@@ -82,16 +83,23 @@ class LinksController < ApplicationController
       @link.url.insert(0, "http://")
       @link.save
     end
+    #@keyword = self.keywords
+    #capture string of tags
+
+    @inputtedtags = (links_params[:link_tags_attributes]["0"][:tag_attributes][:name]).gsub(/,/,'').downcase.split(" ").flatten
+    
     # Decide if tag is already in the database
-    @potentialTag = Tag.find_by(name: links_params[:link_tags_attributes]["0"][:tag_attributes][:name])
-    # if tag is already in db, create a new association btween new link and old tag
-    if @potentialTag
-      @link_tag = @link.link_tags.build(link_id: @link.id, tag_id: @potentialTag.id)
-      @link_tag.save
-      # otherwise, save new tag
-    else
-      @link.tags.build( name: links_params[:link_tags_attributes]["0"][:tag_attributes][:name])
-      @link.save
+    @inputtedtags.each do |tag|
+      potentialTag = Tag.find_by(name: tag)
+      # if tag is already in db, create a new association btween new link and old tag
+      if potentialTag
+        @link_tag = @link.link_tags.build(link_id: @link.id, tag_id: potentialTag.id)
+        @link_tag.save
+        # otherwise, save new tag
+      else
+        @link.tags.build(name: tag)
+        @link.save
+      end
     end
     respond_to do |format|
       if @link.save
@@ -101,6 +109,7 @@ class LinksController < ApplicationController
       end
       # end
     end
+        #binding.pry
   end
 
   # shows details of a single link, including all tags assoc'd with it
@@ -111,9 +120,14 @@ class LinksController < ApplicationController
 
   # loads link and assoc'd tags to edit
   def edit
-    @link_tag = @link.link_tags.build
-    @link_tag.build_tag
     @link = Link.find(params[:id])
+    if current_user && current_user.id == @link.user_id
+      @link_tag = @link.link_tags.build
+      @link_tag.build_tag
+    else
+      flash[:notice] = "Not Authorized!"
+      redirect_to root_path
+    end
   end
 
   # will send updated link attributes via ajax post
@@ -126,22 +140,28 @@ class LinksController < ApplicationController
     end
   end
 
-   def up_vote
+  def up_vote
     session[:return_to] ||= request.referer
     @link = Link.find(params[:id])
-    @link.upvotes = @link.upvotes + 1 
-     @link.save
-   redirect_to session.delete(:return_to)
+    @link.upvotes = @link.upvotes + 1
+    @link.save
+    redirect_to session.delete(:return_to)
   end
+
   def down_vote
     session[:return_to] ||= request.referer
     @link  = Link.find(params[:id])
     @link.downvotes = @link.downvotes + 1
     @link.save
-    redirect_to session.delete(:return_to)    
+    redirect_to session.delete(:return_to)
   end
+
   def destroy
-    @link.destroy
+    if current_user && current_user.id == @link.user_id
+      @link.destroy
+    else
+      flash[:notice] = "Not Authorized!"
+    end
     redirect_to root_path
   end
 
@@ -155,7 +175,7 @@ class LinksController < ApplicationController
   def sort_column
     Link.column_names.include?(params[:sort]) ? params[:sort] : "upvotes"
   end
-  
+
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end

@@ -18,7 +18,7 @@
 <form id="new_link">
     <input type="text" id="title" placeholder="Title" >
     <input type="text" id="url" placeholder="URL">
-    <input type="text" id="name" placeholder="tag">
+    <input type="text" id="name" placeholder="Tags (comma separated)">
     <input type="submit"  >
 </form>
 <br>
@@ -30,7 +30,7 @@
   <div class="panel-body">
    <table class="table table-hover">
     <ul id="publiclist">
-        <% @links.each do |link| %> <tr>
+        <% @link_pub.each do |link| %> <tr>
        <td> 
            <b><%= link.title %></b> 
            <div class="pull-right">
@@ -63,7 +63,7 @@
   <div class="panel-body">
    <table class="table table-hover">
     <ul id="privatelist">
-        <% @linksprivate.each do |link| %> <tr>
+        <% @link_priv.each do |link| %> <tr>
        <td> 
            <b><%= link.title %></b> 
            <div class="pull-right">
