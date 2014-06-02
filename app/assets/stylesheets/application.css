@@ -95,7 +95,6 @@ table#table1 {
   body { 
   padding-top: 70px;  
   font-family: 'Tangerine', serif;
-  font-size: $body-font-size;
   background-size: cover;
   background-image:url('http://www.backgroundsy.com/file/large/digital-waves-background.jpg');
 }
