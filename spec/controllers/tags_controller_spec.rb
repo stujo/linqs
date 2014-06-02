@@ -1,6 +1,16 @@
 require 'spec_helper'
 
 describe TagsController do
+  describe 'new' do
+    it 'associates a new tag with a link' do
+    end
+  end
+
+  describe 'show' do
+    it 'should render the show page' do
+    end
+  end
+
   describe 'create multiple tags' do
 	  # it 'should create multiple tags divided by commas' do
 		# # need to add logic to split tags by comma, OR add multiple tag fields using javascript
