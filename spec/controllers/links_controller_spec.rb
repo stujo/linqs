@@ -11,16 +11,29 @@ describe LinksController do
 
   describe 'new' do
   	it 'creates new tags associated with a new link' do
-  		# @link = FactoryGirl.create(:link)
-  		# @link_tag = @link.link_tags.build
-    # 	@link_tag.build_tag
+  		@link = FactoryGirl.create(:link)
+  		@link_tag = @link.link_tags.build
+    	@link_tag.build_tag
+    	tags = @link.tags
+    	tags.count.should eq(1)
+    end
   end
 
-  describe 'separate_public_and_private_links' do
-  	it 'should return private and a public links arrays' do
+  describe 'private links' do
+		it 'should separate private and public links' do
+			# make a private link
+			# make a public link
+			# check that they display on different parts of the page?
 		end
 
-		it 'should have a private links array that includes private links' do
+		it 'should only show private links belonging to current user' do
+			# check current user, assign it to user1
+			# make a link, assign it to user2
+			# check that link doesn't show up for user1
+		end
+
+		it 'should require log in before creating link' do
+			# i don't know how to do this with devise
 		end
   end
 
