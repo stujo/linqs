@@ -10,9 +10,9 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require bootstrap.min
  *= require_tree .
  *= require_self
- *= require bootstrap.css
  */
 
 #greeting {
@@ -99,7 +99,6 @@ table#table1 {
 body { 
   padding-top: 70px;  
   font-family: 'Tangerine', serif;
-  font-size: $body-font-size;
   background-size: cover;
   background-image:url('http://www.backgroundsy.com/file/large/digital-waves-background.jpg');
 }

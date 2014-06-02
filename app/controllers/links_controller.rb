@@ -100,7 +100,7 @@ class LinksController < ApplicationController
         @link_tag.save
         # otherwise, save new tag
       else
-        @link.tags.build(name: tag)
+        @link.tags.build(name: tag) 
         @link.save
       end
     end
