@@ -5,21 +5,18 @@ class Link < ActiveRecord::Base
   belongs_to :user
   accepts_nested_attributes_for :link_tags
 
-  validates :title, presence: true, length: {minimum: 2}
-  validates :url, presence: true, length: {minimum: 9}
+  validates :title, presence: true, length: { minimum: 2 }
+  validates :url, presence: true, length: { minimum: 9 }
 
   def self.keywords
-    return doc = Pismo::Document.new(self)
+    doc = Pismo::Document.new(self)
   end
 
   def self.search_for(query)
     where('url LIKE :query OR title LIKE :query', query: "%#{query}%")
-    #how do we return what is in the tags as well
+    # how do we return what is in the tags as well
   end
 
-  #Pagination
-  #self.per_page = 20
-
+  # Pagination
+  # self.per_page = 20
 end
-
-

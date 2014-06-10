@@ -6,7 +6,7 @@ class TagsController < ApplicationController
     @tags = Tag.search(params[:search]).order(:name)
     respond_to do |format|
       format.html
-      format.json { render :json => {:tags => @tags.as_json}}
+      format.json { render json: { tags: @tags.as_json } }
     end
   end
 
@@ -25,7 +25,6 @@ class TagsController < ApplicationController
       flash[:errors] = @tag.errors.full_messages
     end
   end
-  
 
   def show
     # renders show page (displays all links associated with that tag)
@@ -49,7 +48,7 @@ class TagsController < ApplicationController
   end
 
   def destroy
-    #@tag = Tag.find(params[:id])
+    # @tag = Tag.find(params[:id])
     @tag.destroy
     redirect_to root_path
   end

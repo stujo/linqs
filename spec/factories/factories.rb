@@ -6,19 +6,19 @@ FactoryGirl.define do
 
   factory :user do
     email
-    password "password"
-    password_confirmation "password"
+    password 'password'
+    password_confirmation 'password'
   end
 
   factory :link do
-    title "Best Link Ever"
-    url "https://www.google.com"
-    tag ""
+    title 'Best Link Ever'
+    url 'https://www.google.com'
+    tag ''
     # user  # currently we don't have any user/link association??
   end
 
   factory :tag do
-    name "sampletag"
+    name 'sampletag'
   end
 
 end
